@@ -1,0 +1,206 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtpghtphnrtur"]
+
+[ext_resource type="Texture2D" uid="uid://c2duf34wchcnf" path="res://icon.svg" id="1_f50pn"]
+[ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ij6vw"]
+size = Vector2(134, 130)
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_ij6vw")
+
+[node name="Raycast" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.35619
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D29" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.44346
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D30" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.53073
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D31" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.61799
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D32" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.70526
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D33" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.79253
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D34" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.87979
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D35" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.96706
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D36" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -3.05433
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D37" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -3.14159
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.26893
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D3" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.18166
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D4" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.0944
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D5" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -2.00713
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D6" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.91986
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D7" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.8326
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D8" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.74533
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D9" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.65806
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D10" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.5708
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D11" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.48353
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D12" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.39626
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D13" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.309
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D14" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.22173
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D15" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.13446
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D16" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -1.0472
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D17" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.959931
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D18" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.872665
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D19" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.785398
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D20" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.698132
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D21" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.610865
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D22" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.523599
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D23" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.436332
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D24" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.349066
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D25" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.261799
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D26" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.174533
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D27" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+rotation = -0.0872665
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="RayCast2D28" type="RayCast2D" parent="Raycast" groups=["raycast"]]
+scale = Vector2(1, 5)
+target_position = Vector2(500, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_ij6vw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_f50pn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.25, 0.25)
