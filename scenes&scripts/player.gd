@@ -14,6 +14,7 @@ var current_rope_length
 @export var ROPE_STIFFNESS: float = 0.7
 @export var ROPE_DAMPING: float = 1
 @export var FORCE_MULT: float = 600
+@export var ROPE_PULL_IN_SPEED: float = 3
 
 @export var ACCEL: float = 50 #how much the player can accelerate horizontally by
 @export var ACCEL_AIR: float = 2000
@@ -39,14 +40,17 @@ func _physics_process(delta: float) -> void:
 			if abs(velocity.x) < SPEED:
 				velocity.x += direction * ACCEL * delta
 		else:
-			print("in air")
-			velocity.x += direction * ACCEL_AIR * delta
+			#print("in air")
+			if direction * velocity.x <= 0 or abs(velocity.x) < SPEED:
+				print("slowing down")
+				velocity.x += direction * ACCEL_AIR * delta
 
 	elif is_on_floor():
 		velocity.x = move_toward(velocity.x, 0, SLOWDOWN_ACCEL_GROUND * delta)
-	if abs(velocity.x) > SPEED and not hooked:
+	"""
+	if abs(velocity.x) > SPEED and is_on_floor():
 		velocity.x = move_toward(velocity.x, ((velocity.x)/abs(velocity.x) * 0.9) * SPEED, SLOWDOWN_ACCEL_GROUND * delta)
-		
+	"""
 	hook()
 	queue_redraw()
 	#update()
@@ -123,8 +127,8 @@ func swing(delta):
 	
 	#apply of rope pulling on player, slightly elastic
 	
-	if toHook.length() > ROPE_LENGTH:
-		var grappleForce = toHook.normalized() * (toHook.length() - ROPE_LENGTH) * ROPE_STIFFNESS
+	if toHook.length() > current_rope_length:
+		var grappleForce = toHook.normalized() * (toHook.length() - current_rope_length) * ROPE_STIFFNESS
 		force += grappleForce
 		
 		var velAlongRope = velocity.dot(toHook.normalized())
@@ -132,4 +136,4 @@ func swing(delta):
 		force += dampForce
 	
 	velocity += force * delta * FORCE_MULT
-	
+	current_rope_length = move_toward(current_rope_length, 15, ROPE_PULL_IN_SPEED * delta)
