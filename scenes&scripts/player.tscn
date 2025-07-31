@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtpghtphnrtur"]
+[gd_scene load_steps=6 format=3 uid="uid://dtpghtphnrtur"]
 
 [ext_resource type="Texture2D" uid="uid://c2duf34wchcnf" path="res://icon.svg" id="1_f50pn"]
 [ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
+[ext_resource type="AudioStream" uid="uid://c058cbrle7v3i" path="res://sfx/jump.wav" id="3_cs8mv"]
+[ext_resource type="AudioStream" uid="uid://wen8shu20p8r" path="res://sfx/grab.wav" id="4_mvksm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ij6vw"]
 size = Vector2(134, 130)
@@ -204,3 +206,9 @@ texture = ExtResource("1_f50pn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.25, 0.25)
+
+[node name="JumpAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cs8mv")
+
+[node name="GrabAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_mvksm")
