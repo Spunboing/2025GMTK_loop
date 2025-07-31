@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var raycast: Node = $Raycast
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 const SPEED = 500.0
 const JUMP_VELOCITY = -600.0
@@ -29,13 +30,32 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		$JumpAudio.play()
+
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
+	
+
+	if direction > 0:
+		animated_sprite.flip_h  = false 
+	elif direction < 0:
+		animated_sprite.flip_h = true
+
+	if is_on_floor():
+		if direction == 0:
+			animated_sprite.play("idle")
+		else:
+			animated_sprite.play("run")
+
+	if Input.is_action_just_pressed("jump"):
+		animated_sprite.play("jump")
+
+
+	
 	if direction:
 		if is_on_floor():
 			if abs(velocity.x) < SPEED:
@@ -89,6 +109,11 @@ func hook():
 	if Input.is_action_just_released("left_click") and hooked:
 		hooked = false
 		
+	if Input.is_action_just_pressed("left_click") and not is_on_floor():
+		animated_sprite.play("grapple")
+	elif Input.is_action_just_released("left_click"):
+		animated_sprite.play("idle")
+	
 func get_hook_pos():
 	var state = get_world_2d().direct_space_state
 	var query = PhysicsRayQueryParameters2D.create(global_position, get_global_mouse_position())

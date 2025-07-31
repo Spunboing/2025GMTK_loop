@@ -1,12 +1,70 @@
-[gd_scene load_steps=6 format=3 uid="uid://dtpghtphnrtur"]
+[gd_scene load_steps=12 format=3 uid="uid://dtpghtphnrtur"]
 
-[ext_resource type="Texture2D" uid="uid://c2duf34wchcnf" path="res://icon.svg" id="1_f50pn"]
 [ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
 [ext_resource type="AudioStream" uid="uid://c058cbrle7v3i" path="res://sfx/jump.wav" id="3_cs8mv"]
+[ext_resource type="Texture2D" uid="uid://smdkickbnqjx" path="res://sprites/Sprite Sheet.png" id="4_cs8mv"]
 [ext_resource type="AudioStream" uid="uid://wen8shu20p8r" path="res://sfx/grab.wav" id="4_mvksm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ij6vw"]
 size = Vector2(134, 130)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cs8mv"]
+atlas = ExtResource("4_cs8mv")
+region = Rect2(48, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvksm"]
+atlas = ExtResource("4_cs8mv")
+region = Rect2(0, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mj8n8"]
+atlas = ExtResource("4_cs8mv")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83f1l"]
+atlas = ExtResource("4_cs8mv")
+region = Rect2(16, 0, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_seiki"]
+atlas = ExtResource("4_cs8mv")
+region = Rect2(32, 0, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_83f1l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cs8mv")
+}],
+"loop": true,
+"name": &"grapple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvksm")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mj8n8")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83f1l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_seiki")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_ij6vw")
@@ -202,7 +260,6 @@ position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_ij6vw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_f50pn")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.25, 0.25)
@@ -212,3 +269,8 @@ stream = ExtResource("3_cs8mv")
 
 [node name="GrabAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_mvksm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_83f1l")
+animation = &"jump"
