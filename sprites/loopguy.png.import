@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://smdkickbnqjx"
-path="res://.godot/imported/Sprite Sheet.png-e63678f24f422a21e3e0c5d0f9fa3fa9.ctex"
+uid="uid://by3htnp5p6607"
+path="res://.godot/imported/loopguy.png-ed24a3fc8a1378a7c9060f2297c5998c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Sprite Sheet.png"
-dest_files=["res://.godot/imported/Sprite Sheet.png-e63678f24f422a21e3e0c5d0f9fa3fa9.ctex"]
+source_file="res://sprites/loopguy.png"
+dest_files=["res://.godot/imported/loopguy.png-ed24a3fc8a1378a7c9060f2297c5998c.ctex"]
 
 [params]
 

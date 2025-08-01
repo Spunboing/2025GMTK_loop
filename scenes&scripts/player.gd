@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var raycast: Node = $Raycast
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var arm = $Arm
 
 const SPEED = 500.0
 const JUMP_VELOCITY = -600.0
@@ -33,6 +34,7 @@ const SPIN_ACCEL: float = 720
 
 func _ready() -> void:
 	current_rope_length = ROPE_LENGTH
+	arm.visible = false
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -43,6 +45,10 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		$JumpAudio.play()
+		animated_sprite.play("jump")
+	
+	if velocity.y > 0 and not hooked:
+		animated_sprite.play("fall")
 
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -50,9 +56,9 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("left", "right")
 	
 
-	if direction > 0:
+	if velocity.x > 0:
 		animated_sprite.flip_h  = false 
-	elif direction < 0:
+	elif velocity.x < 0:
 		animated_sprite.flip_h = true
 
 	if is_on_floor():
@@ -60,14 +66,13 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.play("idle")
 		else:
 			animated_sprite.play("run")
-
-	if Input.is_action_just_pressed("jump"):
-		animated_sprite.play("jump")
+		
 
 
 	
 	if direction:
 		if is_on_floor():
+			hooked = false
 			if abs(velocity.x) < SPEED:
 				velocity.x += direction * ACCEL * delta
 		else:
@@ -87,12 +92,15 @@ func _physics_process(delta: float) -> void:
 	#update()
 	if hooked:
 		swing(delta)
-		$AnimatedSprite2D.rotation = ((hook_pos - global_position).angle()) + 90
+		if not is_on_floor():
+			arm.visible = true
+		arm.rotation = ((hook_pos - arm.global_position).angle()) + 90
 		spinVel = 0
 		#velocity *= .975 #Swing speed
 		
 	var spinInput = Input.get_axis("flip_left", "flip_right")
 	if not is_on_floor() and not hooked:
+		#arm.visible = false
 		spinVel = move_toward(spinVel, spinInput * MAX_SPIN_SPEED, SPIN_ACCEL * delta)
 		$AnimatedSprite2D.rotate(deg_to_rad(spinVel) * delta)
 	
@@ -109,7 +117,7 @@ func _draw():
 	if hooked:
 		#print(position)
 		#print(to_local(hook_pos))
-		draw_line(Vector2.ZERO, to_local(hook_pos), Color(0.35, 0.7, 0.9), 3, true) #cyan
+		draw_line(arm.position, to_local(hook_pos), Color(0.35, 0.7, 0.9), 3, true) #cyan
 	else:
 		return
 		#what is this? why is there code below a return?
@@ -117,6 +125,7 @@ func _draw():
 		var collide_point = $Raycast.get_collision_point()
 		if colliding and pos.distance_to(collide_point) < ROPE_LENGTH:
 			draw_line(Vector2.ZERO, to_local(collide_point), Color(1, 1, 1, 0.25), 3, true) #white
+		arm.visible = false
 
 func hook():
 	#$Raycast.look_at(-get_global_mouse_position())
@@ -124,6 +133,8 @@ func hook():
 	
 	if Input.is_action_just_pressed("left_click"):
 		hook_pos = get_hook_pos()
+		if not is_on_floor():
+			animated_sprite.play("grapple")
 		#print(hook_pos)
 		if hook_pos:
 			hooked = true
@@ -131,9 +142,7 @@ func hook():
 			current_rope_length = global_position.distance_to(hook_pos)
 	if Input.is_action_just_released("left_click") and hooked:
 		hooked = false
-		
-	if Input.is_action_just_pressed("left_click") and not is_on_floor():
-		animated_sprite.play("grapple")
+		arm.visible = false
 	elif Input.is_action_just_released("left_click"):
 		animated_sprite.play("idle")
 	
