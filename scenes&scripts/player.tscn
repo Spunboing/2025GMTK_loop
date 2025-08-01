@@ -302,9 +302,6 @@ shape = SubResource("RectangleShape2D_ij6vw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.25, 0.25)
-
 [node name="JumpAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_cs8mv")
 
