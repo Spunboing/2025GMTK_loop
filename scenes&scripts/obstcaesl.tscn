@@ -2,15 +2,24 @@
 
 [ext_resource type="PackedScene" uid="uid://dtpghtphnrtur" path="res://scenes&scripts/player.tscn" id="1_5bav4"]
 [ext_resource type="Texture2D" uid="uid://c2duf34wchcnf" path="res://icon.svg" id="2_o06op"]
-[ext_resource type="PackedScene" uid="uid://xvp7ettpm0to" path="res://scenes&scripts/fireball.tscn" id="3_o06op"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppurd"]
-size = Vector2(3527, 556)
+[ext_resource type="Script" uid="uid://bhtc8d4j8virj" path="res://scenes&scripts/obstacle_spawner.gd" id="4_7cu4l"]
+[ext_resource type="TileSet" uid="uid://vy22ujmksf2a" path="res://sprites/new_tile_set.tres" id="4_bb2ye"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbtko"]
 size = Vector2(50.8064, 52.4194)
 
 [node name="grapple_test" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(8.45193, 8.45193)
+tile_set = ExtResource("4_bb2ye")
+rendering_quadrant_size = 128
+format = 2
+layer_0/tile_data = PackedInt32Array(131060, 0, 0, 131061, 65536, 0, 131062, 65536, 0, 131063, 65536, 0, 131064, 65536, 1, 131065, 65536, 1, 131066, 65536, 1, 131067, 65536, 1, 131068, 65536, 0, 131069, 65536, 0, 131070, 65536, 0, 131071, 65536, 0, 65536, 65536, 0, 65537, 65536, 0, 65538, 65536, 0, 65539, 65536, 0, 65540, 65536, 0, 65541, 65536, 0, 65542, 65536, 0, 65543, 65536, 0, 65544, 65536, 0, 65545, 65536, 0, 65546, 65536, 0, 65547, 65536, 0, 65548, 65536, 0, 65549, 65536, 0, 65550, 65536, 0, 65551, 131072, 0, 131087, 131072, 1, 196623, 131072, 1, 262159, 131072, 2, 327668, 0, 2, 327669, 65536, 2, 327670, 65536, 2, 327671, 65536, 2, 327672, 65536, 2, 327673, 65536, 2, 327674, 65536, 2, 327675, 65536, 2, 327676, 65536, 2, 327677, 65536, 2, 327678, 65536, 2, 327679, 65536, 2, 262144, 65536, 2, 262145, 65536, 2, 262146, 65536, 2, 262147, 65536, 2, 262148, 65536, 2, 262149, 65536, 2, 262150, 65536, 2, 262151, 65536, 2, 262152, 65536, 2, 262153, 65536, 2, 262154, 65536, 2, 262155, 65536, 2, 262156, 65536, 2, 262157, 65536, 2, 262158, 65536, 2, 196597, 65536, 1, 262133, 65536, 1, 262134, 65536, 1, 262135, 65536, 1, 262136, 65536, 1, 262137, 65536, 1, 262138, 65536, 1, 262139, 65536, 1, 262140, 65536, 1, 262141, 65536, 1, 262142, 65536, 1, 262143, 65536, 1, 196608, 65536, 1, 196609, 65536, 1, 196610, 65536, 1, 196611, 65536, 1, 196612, 65536, 1, 196613, 65536, 1, 196614, 65536, 1, 196615, 65536, 1, 196616, 65536, 1, 196617, 65536, 1, 196618, 65536, 1, 196619, 65536, 1, 196620, 65536, 1, 196621, 65536, 1, 196622, 65536, 1, 131086, 65536, 1, 131085, 65536, 1, 131084, 65536, 1, 131083, 65536, 1, 131082, 65536, 1, 131081, 65536, 1, 131080, 65536, 1, 131079, 65536, 1, 131078, 65536, 1, 131077, 65536, 1, 131076, 65536, 1, 131075, 65536, 1, 131074, 65536, 1, 131073, 65536, 1, 131072, 65536, 1, 196607, 65536, 1, 196606, 65536, 1, 196605, 65536, 1, 196604, 65536, 1, 196603, 65536, 1, 196599, 65536, 1, 196598, 65536, 1, 196600, 65536, 1, 196601, 65536, 1, 196602, 65536, 1, 196596, 0, 1, 262132, 0, 1)
+
+[node name="Obstacle spawner" type="Node2D" parent="."]
+position = Vector2(1026, -63)
+script = ExtResource("4_7cu4l")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_5bav4")]
 position = Vector2(-1317, -39)
@@ -25,15 +34,6 @@ SLOWDOWN_ACCEL_GROUND = 7000.0
 
 [node name="world" type="StaticBody2D" parent="."]
 position = Vector2(0, -193)
-
-[node name="Icon" type="Sprite2D" parent="world"]
-position = Vector2(367.5, 537)
-scale = Vector2(28.0547, 4.17188)
-texture = ExtResource("2_o06op")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="world"]
-position = Vector2(329.5, 539)
-shape = SubResource("RectangleShape2D_ppurd")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="world"]
 position = Vector2(-211, -228)
@@ -103,6 +103,3 @@ shape = SubResource("RectangleShape2D_pbtko")
 position = Vector2(-0.80645, 0)
 scale = Vector2(0.403226, 0.403226)
 texture = ExtResource("2_o06op")
-
-[node name="Fireball" parent="." instance=ExtResource("3_o06op")]
-position = Vector2(1249, -64)

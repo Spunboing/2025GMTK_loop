@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://xvp7ettpm0to"]
+
+[ext_resource type="Script" uid="uid://drsugdv4w03nf" path="res://scenes&scripts/obstacles/fireball.gd" id="1_jah63"]
+[ext_resource type="Texture2D" uid="uid://cdbpomi70b5eo" path="res://sprites/tile_0138.png" id="2_jah63"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qf7ev"]
+radius = 63.0
+
+[sub_resource type="Animation" id="Animation_qf7ev"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_jah63"]
+resource_name = "spin"
+loop_mode = 1
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 1.5708, 3.14159, 4.71239, 0.0, 1.5708, 3.14159, 4.71239, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m34j8"]
+_data = {
+&"RESET": SubResource("Animation_qf7ev"),
+&"spin": SubResource("Animation_jah63")
+}
+
+[node name="Fireball" type="Node2D"]
+script = ExtResource("1_jah63")
+speed = 25
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(9.94, 9.94)
+texture = ExtResource("2_jah63")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_qf7ev")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_m34j8")
+}

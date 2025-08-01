@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://d35ef1fx3xj1q" path="res://sfx/whoosh-jump.wav" id="6_83f1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ij6vw"]
-size = Vector2(134, 130)
+size = Vector2(77, 241)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_83f1l"]
 atlas = ExtResource("5_mvksm")
@@ -297,7 +297,7 @@ scale = Vector2(1, 5)
 target_position = Vector2(500, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
+position = Vector2(7.5, -0.5)
 shape = SubResource("RectangleShape2D_ij6vw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -318,9 +318,10 @@ stream = ExtResource("4_83f1l")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(7.5625, 7.5625)
 sprite_frames = SubResource("SpriteFrames_mr2mj")
-animation = &"jump"
+animation = &"idle"
 
 [node name="Arm" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(0, -23)
 rotation = 0.00660015
 scale = Vector2(7.562, 7.562)
