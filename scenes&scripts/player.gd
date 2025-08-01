@@ -11,6 +11,16 @@ var hooked = false
 var ROPE_LENGTH = 1000
 var current_rope_length
 
+var spinVel := 0.0
+var totalFlipRotation: float = 0
+var isFlipping: bool = false
+var previousRotation: float = 0
+
+@export var MAX_SPIN_SPEED: float = 270
+const SPIN_ACCEL: float = 720
+
+
+
 @export var GRAPPLE_ACCEL_MULT: float = 1
 @export var ROPE_STIFFNESS: float = 0.7
 @export var ROPE_DAMPING: float = 1
@@ -63,7 +73,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			#print("in air")
 			if direction * velocity.x <= 0 or abs(velocity.x) < SPEED:
-				print("slowing down")
+				#print("slowing down")
 				velocity.x += direction * ACCEL_AIR * delta
 
 	elif is_on_floor():
@@ -73,11 +83,24 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, ((velocity.x)/abs(velocity.x) * 0.9) * SPEED, SLOWDOWN_ACCEL_GROUND * delta)
 	"""
 	hook()
-	queue_redraw()
+	
 	#update()
 	if hooked:
 		swing(delta)
+		$AnimatedSprite2D.rotation = ((hook_pos - global_position).angle()) + 90
+		spinVel = 0
 		#velocity *= .975 #Swing speed
+		
+	var spinInput = Input.get_axis("flip_left", "flip_right")
+	if not is_on_floor() and not hooked:
+		spinVel = move_toward(spinVel, spinInput * MAX_SPIN_SPEED, SPIN_ACCEL * delta)
+		$AnimatedSprite2D.rotate(deg_to_rad(spinVel) * delta)
+	
+	detectFlip()
+	
+	queue_redraw()
+	
+	previousRotation = $AnimatedSprite2D.rotation
 	move_and_slide()
 
 func _draw():
@@ -89,7 +112,7 @@ func _draw():
 		draw_line(Vector2.ZERO, to_local(hook_pos), Color(0.35, 0.7, 0.9), 3, true) #cyan
 	else:
 		return
-		
+		#what is this? why is there code below a return?
 		var colliding = $Raycast.is_colliding()
 		var collide_point = $Raycast.get_collision_point()
 		if colliding and pos.distance_to(collide_point) < ROPE_LENGTH:
@@ -164,3 +187,32 @@ func swing(delta):
 	
 	velocity += force * delta * FORCE_MULT
 	current_rope_length = move_toward(current_rope_length, 15, ROPE_PULL_IN_SPEED * delta)
+
+func detectFlip():
+	if Input.is_action_just_pressed("flip_left") or Input.is_action_just_pressed("flip_right"):
+		totalFlipRotation = 0
+	
+	if Input.get_axis("flip_left", "flip_right") != 0 and not hooked:
+		if not isFlipping:
+			isFlipping = true
+			totalFlipRotation = 0
+		
+		var spinDelta = $AnimatedSprite2D.rotation - previousRotation
+		
+		#highkey stole this part from gemini but it looks right soo...
+		if spinDelta > 180:
+			spinDelta -= 360
+		elif spinDelta < -180:
+			spinDelta += 360
+		
+		totalFlipRotation += rad_to_deg(spinDelta)
+		if abs(totalFlipRotation) >= 360:
+			print("DID A FLIP")
+			totalFlipRotation = 0
+			$trickComplete.play()
+			#will put something else here later
+		
+		#print(totalFlipRotation)
+		
+		
+		

@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dtpghtphnrtur"]
+[gd_scene load_steps=13 format=3 uid="uid://dtpghtphnrtur"]
 
 [ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
 [ext_resource type="AudioStream" uid="uid://c058cbrle7v3i" path="res://sfx/jump.wav" id="3_cs8mv"]
+[ext_resource type="AudioStream" uid="uid://c3oucj15sl1ii" path="res://sfx/blipSelect.wav" id="4_83f1l"]
 [ext_resource type="Texture2D" uid="uid://smdkickbnqjx" path="res://sprites/Sprite Sheet.png" id="4_cs8mv"]
 [ext_resource type="AudioStream" uid="uid://wen8shu20p8r" path="res://sfx/grab.wav" id="4_mvksm"]
 
@@ -70,6 +71,7 @@ animations = [{
 script = ExtResource("1_ij6vw")
 
 [node name="Raycast" type="Node2D" parent="."]
+visible = false
 
 [node name="RayCast2D" type="RayCast2D" parent="Raycast" groups=["raycast"]]
 rotation = -2.35619
@@ -269,6 +271,9 @@ stream = ExtResource("3_cs8mv")
 
 [node name="GrabAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_mvksm")
+
+[node name="trickComplete" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_83f1l")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(10, 10)
