@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c2duf34wchcnf" path="res://icon.svg" id="2_o06op"]
 [ext_resource type="Script" uid="uid://bhtc8d4j8virj" path="res://scenes&scripts/obstacle_spawner.gd" id="4_7cu4l"]
 [ext_resource type="TileSet" uid="uid://vy22ujmksf2a" path="res://sprites/new_tile_set.tres" id="4_bb2ye"]
-[ext_resource type="Script" path="res://scenes&scripts/camera_2d.gd" id="5_bb2ye"]
+[ext_resource type="Script" uid="uid://w1a2n7dqfdh7" path="res://scenes&scripts/camera_2d.gd" id="5_bb2ye"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pbtko"]
 size = Vector2(50.8064, 52.4194)
@@ -107,7 +107,7 @@ zoom = Vector2(0.25, 0.25)
 script = ExtResource("5_bb2ye")
 
 [node name="Obstacle spawner" type="Node2D" parent="Camera2D"]
-position = Vector2(2343, -24)
+position = Vector2(2343, 0)
 script = ExtResource("4_7cu4l")
 
 [node name="Timer" type="Timer" parent="Camera2D/Obstacle spawner"]

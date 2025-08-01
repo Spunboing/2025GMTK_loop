@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://xvp7ettpm0to"]
+[gd_scene load_steps=7 format=3 uid="uid://d073uyshv0fd0"]
 
-[ext_resource type="Script" uid="uid://drsugdv4w03nf" path="res://scenes&scripts/obstacles/throwable.gd" id="1_jah63"]
-[ext_resource type="Texture2D" uid="uid://cdbpomi70b5eo" path="res://sprites/tile_0138.png" id="2_jah63"]
+[ext_resource type="Script" uid="uid://drsugdv4w03nf" path="res://scenes&scripts/obstacles/throwable.gd" id="1_ujcj5"]
+[ext_resource type="Texture2D" uid="uid://csrfhv2g0ox2o" path="res://sprites/tile_0127.png" id="2_bsk73"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_qf7ev"]
-radius = 63.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rsp8i"]
+size = Vector2(89, 159)
 
 [sub_resource type="Animation" id="Animation_qf7ev"]
 length = 0.001
@@ -44,18 +44,19 @@ _data = {
 &"spin": SubResource("Animation_jah63")
 }
 
-[node name="Fireball" type="Node2D"]
-script = ExtResource("1_jah63")
+[node name="Axe" type="Node2D"]
+script = ExtResource("1_ujcj5")
 speed = 25
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(9.94, 9.94)
-texture = ExtResource("2_jah63")
+texture = ExtResource("2_bsk73")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("CircleShape2D_qf7ev")
+position = Vector2(-24.5, -0.5)
+shape = SubResource("RectangleShape2D_rsp8i")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -65,3 +66,5 @@ libraries = {
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(-25, -0.499992)
 scale = Vector2(5.5, 7.95)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
