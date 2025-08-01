@@ -45,10 +45,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		$JumpAudio.play()
-		animated_sprite.play("jump")
 	
-	if velocity.y > 0 and not hooked:
-		animated_sprite.play("fall")
+	if not is_on_floor() and not hooked:
+		animated_sprite.play("jump")
 
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -143,8 +142,11 @@ func hook():
 	if Input.is_action_just_released("left_click") and hooked:
 		hooked = false
 		arm.visible = false
+		if velocity.y < 0:
+			$WEeeeeee.play()
 	elif Input.is_action_just_released("left_click"):
 		animated_sprite.play("idle")
+		
 	
 func get_hook_pos():
 	var state = get_world_2d().direct_space_state
