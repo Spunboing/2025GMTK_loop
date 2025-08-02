@@ -1,21 +1,34 @@
-[gd_scene load_steps=11 format=3 uid="uid://srsec5qg8pn0"]
+[gd_scene load_steps=11 format=4 uid="uid://srsec5qg8pn0"]
 
 [ext_resource type="PackedScene" uid="uid://dtpghtphnrtur" path="res://scenes&scripts/player.tscn" id="1_ar31g"]
-[ext_resource type="Texture2D" uid="uid://c2duf34wchcnf" path="res://icon.svg" id="2_kr30s"]
+[ext_resource type="Texture2D" uid="uid://bga1hsm8ci45m" path="res://sprites/red_drapes.png" id="1_n0tpe"]
 [ext_resource type="PackedScene" uid="uid://dwiujqnqbvrr4" path="res://scenes&scripts/death_barrier.tscn" id="2_wb70l"]
 [ext_resource type="PackedScene" uid="uid://fjjqrhtpl07o" path="res://scenes&scripts/grapple_point.tscn" id="3_kr30s"]
 [ext_resource type="Script" uid="uid://w1a2n7dqfdh7" path="res://scenes&scripts/camera_2d.gd" id="3_yw83d"]
 [ext_resource type="Script" uid="uid://bhtc8d4j8virj" path="res://scenes&scripts/obstacle_spawner.gd" id="4_100jw"]
+[ext_resource type="TileSet" uid="uid://vy22ujmksf2a" path="res://sprites/new_tile_set.tres" id="4_wb70l"]
 [ext_resource type="Script" uid="uid://bfcj8sb8nrpxh" path="res://scenes&scripts/grapple_point_spawner.gd" id="5_100jw"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n0tpe"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vqadq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ppurd"]
-size = Vector2(3527, 556)
-
 [node name="grapple_test" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+z_index = -1
+scale = Vector2(29.4173, 29.4173)
+scroll_scale = Vector2(0.5, 0.5)
+scroll_offset = Vector2(-842, 0)
+repeat_size = Vector2(96, 0)
+
+[node name="RedDrapes" type="Sprite2D" parent="Parallax2D"]
+modulate = Color(0.622161, 0.606085, 0.549588, 1)
+texture_repeat = 3
+position = Vector2(0, 1.496)
+texture = ExtResource("1_n0tpe")
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 96)
 
 [node name="death barrier2" parent="." instance=ExtResource("2_wb70l")]
 position = Vector2(-5752, 58)
@@ -40,7 +53,7 @@ limit_bottom = 1500
 script = ExtResource("3_yw83d")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_ar31g")]
-position = Vector2(-1317, -39)
+position = Vector2(-2663, -83)
 GRAPPLE_ACCEL_MULT = 0.3
 ROPE_STIFFNESS = 1.3
 ROPE_DAMPING = 0.8
@@ -50,18 +63,16 @@ ACCEL = 6000.0
 ACCEL_AIR = 600.0
 SLOWDOWN_ACCEL_GROUND = 7000.0
 
-[node name="world" type="StaticBody2D" parent="."]
-position = Vector2(0, -193)
-scale = Vector2(2, 2)
+[node name="world2" type="Node2D" parent="."]
+scale = Vector2(8.45193, 8.45193)
 
-[node name="Icon" type="Sprite2D" parent="world"]
-position = Vector2(367.5, 537)
-scale = Vector2(28.0547, 4.17188)
-texture = ExtResource("2_kr30s")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="world"]
-position = Vector2(329.5, 539)
-shape = SubResource("RectangleShape2D_ppurd")
+[node name="Layer0" type="TileMapLayer" parent="world2"]
+use_parent_material = true
+scale = Vector2(1, 1)
+tile_map_data = PackedByteArray("AADq/wIAAAAAAAAAAADq/wMAAAAAAAEAAADq/wQAAAAAAAEAAADq/wUAAAAAAAEAAADq/wYAAAAAAAEAAADq/wcAAAAAAAEAAADq/wgAAAAAAAEAAADq/wkAAAAAAAEAAADq/woAAAAAAAIAAADr/wIAAAABAAAAAADr/wMAAAABAAEAAADr/wQAAAABAAEAAADr/wUAAAABAAEAAADr/wYAAAABAAEAAADr/wcAAAABAAEAAADr/wgAAAABAAEAAADr/wkAAAABAAEAAADr/woAAAABAAIAAADs/wIAAAABAAAAAADs/wMAAAABAAEAAADs/wQAAAABAAEAAADs/wUAAAABAAEAAADs/wYAAAABAAEAAADs/wcAAAABAAEAAADs/wgAAAABAAEAAADs/wkAAAABAAEAAADs/woAAAABAAIAAADt/wIAAAABAAAAAADt/wMAAAABAAEAAADt/wQAAAABAAEAAADt/wUAAAABAAEAAADt/wYAAAABAAEAAADt/wcAAAABAAEAAADt/wgAAAABAAEAAADt/wkAAAABAAEAAADt/woAAAABAAIAAADu/wIAAAABAAAAAADu/wMAAAABAAEAAADu/wQAAAABAAEAAADu/wUAAAABAAEAAADu/wYAAAABAAEAAADu/wcAAAABAAEAAADu/wgAAAABAAEAAADu/wkAAAABAAEAAADu/woAAAABAAIAAADv/wIAAAABAAAAAADv/wMAAAABAAEAAADv/wQAAAABAAEAAADv/wUAAAABAAEAAADv/wYAAAABAAEAAADv/wcAAAABAAEAAADv/wgAAAABAAEAAADv/wkAAAABAAEAAADv/woAAAABAAIAAADw/wIAAAABAAAAAADw/wMAAAABAAEAAADw/wQAAAABAAEAAADw/wUAAAABAAEAAADw/wYAAAABAAEAAADw/wcAAAABAAEAAADw/wgAAAABAAEAAADw/wkAAAABAAEAAADw/woAAAABAAIAAADx/wIAAAABAAAAAADx/wMAAAABAAEAAADx/wQAAAABAAEAAADx/wUAAAABAAEAAADx/wYAAAABAAEAAADx/wcAAAABAAEAAADx/wgAAAABAAEAAADx/wkAAAABAAEAAADx/woAAAABAAIAAADy/wIAAAABAAAAAADy/wMAAAABAAEAAADy/wQAAAABAAEAAADy/wUAAAABAAEAAADy/wYAAAABAAEAAADy/wcAAAABAAEAAADy/wgAAAABAAEAAADy/wkAAAABAAEAAADy/woAAAABAAIAAADz/wIAAAABAAAAAADz/wMAAAABAAEAAADz/wQAAAABAAEAAADz/wUAAAABAAEAAADz/wYAAAABAAEAAADz/wcAAAABAAEAAADz/wgAAAABAAEAAADz/wkAAAABAAEAAADz/woAAAABAAIAAAD0/wIAAAABAAAAAAD0/wMAAAABAAEAAAD0/wQAAAABAAEAAAD0/wUAAAABAAEAAAD0/wYAAAABAAEAAAD0/wcAAAABAAEAAAD0/wgAAAABAAEAAAD0/wkAAAABAAEAAAD0/woAAAABAAIAAAD1/wIAAAABAAAAAAD1/wMAAAABAAEAAAD1/wQAAAABAAEAAAD1/wUAAAABAAEAAAD1/wYAAAABAAEAAAD1/wcAAAABAAEAAAD1/wgAAAABAAEAAAD1/wkAAAABAAEAAAD1/woAAAABAAIAAAD2/wMAAAACAAEAAAD2/wQAAAACAAEAAAD2/wUAAAACAAEAAAD2/wYAAAACAAEAAAD2/wcAAAACAAEAAAD2/wgAAAACAAEAAAD2/wkAAAACAAEAAAD2/woAAAACAAIAAAD2/wIAAAACAAAAAAA=")
+tile_set = ExtResource("4_wb70l")
+rendering_quadrant_size = 128
+use_kinematic_bodies = true
 
 [node name="grapple point" parent="." instance=ExtResource("3_kr30s")]
 position = Vector2(-463, -483)

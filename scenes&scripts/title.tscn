@@ -1,25 +1,111 @@
-[gd_scene load_steps=4 format=3 uid="uid://1xff5pumhoo5"]
+[gd_scene load_steps=8 format=3 uid="uid://1xff5pumhoo5"]
 
 [ext_resource type="Script" uid="uid://c0rtfwooqw3u5" path="res://scenes&scripts/title.gd" id="1_i327d"]
 [ext_resource type="Texture2D" uid="uid://cuh0dxivpbpvf" path="res://assets/51TioqLkRnL._UF894,1000_QL80_.jpg" id="1_qtvll"]
 [ext_resource type="FontFile" uid="uid://cgb5knf88i4nc" path="res://assets/upheavtt.ttf" id="2_i327d"]
+[ext_resource type="Texture2D" uid="uid://bga1hsm8ci45m" path="res://sprites/red_drapes.png" id="4_r3y0w"]
+
+[sub_resource type="Animation" id="Animation_j6qfw"]
+resource_name = "opensesame"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(96, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-847, -368), Vector2(-1465, -368)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -368), Vector2(610, -368)]
+}
+
+[sub_resource type="Animation" id="Animation_jurh7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(96, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-847, -368)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -368)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rlfg8"]
+_data = {
+&"RESET": SubResource("Animation_jurh7"),
+&"opensesame": SubResource("Animation_j6qfw")
+}
 
 [node name="title" type="Node2D"]
 script = ExtResource("1_i327d")
 
 [node name="51TioqLkRnL_Uf894,1000Ql80" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(0, 3)
+position = Vector2(-0.196228, 137.809)
 scale = Vector2(1.3754, 1.3754)
 texture = ExtResource("1_qtvll")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-0.196228, 134.809)
 
 [node name="Button" type="Button" parent="."]
-offset_left = -250.0
-offset_top = 132.0
-offset_right = -56.0
-offset_bottom = 198.0
+offset_left = -250.196
+offset_top = 266.809
+offset_right = -56.1962
+offset_bottom = 332.809
 scale = Vector2(2.46854, 2.46854)
 theme_override_colors/font_hover_pressed_color = Color(1.01075e-06, 0.531399, 1.05888e-06, 1)
 theme_override_colors/font_hover_color = Color(0, 0.764052, 0, 1)
@@ -30,15 +116,35 @@ theme_override_font_sizes/font_size = 64
 text = "Start"
 
 [node name="TextEdit" type="TextEdit" parent="."]
-offset_left = -349.0
-offset_top = -296.0
-offset_right = 373.0
-offset_bottom = -163.0
+offset_left = -349.196
+offset_top = -161.191
+offset_right = 372.804
+offset_bottom = -28.1907
 theme_override_colors/font_outline_color = Color(2.55695e-08, 0.0915209, 0.0347745, 1)
 theme_override_colors/font_color = Color(0.858933, 0, 0.145745, 1)
 theme_override_constants/outline_size = 30
 theme_override_fonts/font = ExtResource("2_i327d")
 theme_override_font_sizes/font_size = 128
 text = " Do a Flip"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rlfg8")
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -847.0
+offset_top = -368.0
+offset_right = -751.0
+offset_bottom = -272.0
+scale = Vector2(8.85011, 8.85011)
+texture = ExtResource("4_r3y0w")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_top = -368.0
+offset_right = 96.0
+offset_bottom = -272.0
+scale = Vector2(8.85011, 8.85011)
+texture = ExtResource("4_r3y0w")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -63,6 +63,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true
 
 	if is_on_floor():
+		$AnimatedSprite2D.rotation = 0
 		if direction == 0:
 			animated_sprite.play("idle")
 		else:
@@ -92,6 +93,7 @@ func _physics_process(delta: float) -> void:
 	
 	#update()
 	if hooked:
+		$AnimatedSprite2D.rotation = 0
 		swing(delta)
 		if not is_on_floor():
 			arm.visible = true

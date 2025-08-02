@@ -3,6 +3,8 @@ extends Node2D
 @export var speed : int = 25
 @onready var camera: Camera2D = $"../Camera2D"
 
+func _ready() -> void:
+	$AnimationPlayer.play("spin")
 
 func _physics_process(delta: float) -> void:
 	global_position.x -= speed

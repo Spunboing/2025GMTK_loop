@@ -1,11 +1,11 @@
 [gd_scene load_steps=20 format=3 uid="uid://dtpghtphnrtur"]
 
 [ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
-[ext_resource type="AudioStream" uid="uid://c058cbrle7v3i" path="res://sfx/jump.wav" id="3_cs8mv"]
-[ext_resource type="AudioStream" uid="uid://wen8shu20p8r" path="res://sfx/grab.wav" id="4_mvksm"]
+[ext_resource type="AudioStream" uid="uid://bp37oq5qglxxo" path="res://sfx/jump sfx.wav" id="2_seiki"]
+[ext_resource type="AudioStream" uid="uid://cudcwd2dj3gx7" path="res://sfx/grab sfx.wav" id="3_mj8n8"]
 [ext_resource type="AudioStream" uid="uid://de76uekabtldr" path="res://sfx/TrickComplete.wav" id="4_seiki"]
 [ext_resource type="Texture2D" uid="uid://by3htnp5p6607" path="res://sprites/loopguy.png" id="5_mvksm"]
-[ext_resource type="AudioStream" uid="uid://u0kys32x2xl3" path="res://sfx/Whoosh.wav" id="6_seiki"]
+[ext_resource type="AudioStream" uid="uid://d35ef1fx3xj1q" path="res://sfx/whoosh-jump.wav" id="6_dw6d4"]
 [ext_resource type="FontFile" uid="uid://bit32tvpkg3ow" path="res://assets/ari-w9500-bold.ttf" id="7_seiki"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ij6vw"]
@@ -304,10 +304,10 @@ shape = SubResource("RectangleShape2D_ij6vw")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="JumpAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_cs8mv")
+stream = ExtResource("2_seiki")
 
 [node name="GrabAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_mvksm")
+stream = ExtResource("3_mj8n8")
 
 [node name="trickComplete" type="AudioStreamPlayer2D" parent="."]
 rotation = 0.00226727
@@ -326,7 +326,7 @@ scale = Vector2(7.562, 7.562)
 sprite_frames = SubResource("SpriteFrames_4j65y")
 
 [node name="WEeeeeee" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_seiki")
+stream = ExtResource("6_dw6d4")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 64.0
