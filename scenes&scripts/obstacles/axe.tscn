@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d073uyshv0fd0"]
 
-[ext_resource type="Script" uid="uid://drsugdv4w03nf" path="res://scenes&scripts/obstacles/throwable.gd" id="1_ujcj5"]
+[ext_resource type="Script" path="res://scenes&scripts/obstacles/fireball.gd" id="1_ujcj5"]
 [ext_resource type="Texture2D" uid="uid://csrfhv2g0ox2o" path="res://sprites/tile_0127.png" id="2_bsk73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rsp8i"]

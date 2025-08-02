@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://fjjqrhtpl07o"]
+
+[ext_resource type="Texture2D" uid="uid://c2duf34wchcnf" path="res://icon.svg" id="1_8lbqe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1nld"]
+size = Vector2(129, 126)
+
+[node name="grapple point" type="StaticBody2D" groups=["point spawner"]]
+z_index = -1
+scale = Vector2(2.6533, 2.6533)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -1)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_y1nld")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8lbqe")

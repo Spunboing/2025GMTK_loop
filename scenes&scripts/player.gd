@@ -3,9 +3,11 @@ extends CharacterBody2D
 @onready var raycast: Node = $Raycast
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var arm = $Arm
+@onready var score_popup: Label = $Label
 
 const SPEED = 500.0
 const JUMP_VELOCITY = -600.0
+
 
 var hook_pos = Vector2()
 var hooked = false
@@ -224,6 +226,4 @@ func detectFlip():
 			#will put something else here later
 		
 		#print(totalFlipRotation)
-		
-		
 		

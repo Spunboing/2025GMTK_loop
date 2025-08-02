@@ -104,6 +104,8 @@ texture = ExtResource("2_o06op")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1317, -39)
 zoom = Vector2(0.25, 0.25)
+limit_top = -1400
+limit_bottom = 2200
 script = ExtResource("5_bb2ye")
 
 [node name="Obstacle spawner" type="Node2D" parent="Camera2D"]

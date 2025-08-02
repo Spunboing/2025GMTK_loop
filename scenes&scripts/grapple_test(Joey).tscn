@@ -1,15 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://srsec5qg8pn0"]
+[gd_scene load_steps=7 format=3 uid="uid://srsec5qg8pn0"]
 
 [ext_resource type="PackedScene" uid="uid://dtpghtphnrtur" path="res://scenes&scripts/player.tscn" id="1_ar31g"]
 [ext_resource type="Texture2D" uid="uid://c2duf34wchcnf" path="res://icon.svg" id="2_kr30s"]
+[ext_resource type="PackedScene" uid="uid://fjjqrhtpl07o" path="res://scenes&scripts/grapple_point.tscn" id="3_kr30s"]
+[ext_resource type="Script" uid="uid://w1a2n7dqfdh7" path="res://scenes&scripts/camera_2d.gd" id="3_yw83d"]
+[ext_resource type="Script" uid="uid://bfcj8sb8nrpxh" path="res://scenes&scripts/grapple_point_spawner.gd" id="5_100jw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ppurd"]
 size = Vector2(3527, 556)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbtko"]
-size = Vector2(50.8064, 52.4194)
-
 [node name="grapple_test" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1317, -39)
+zoom = Vector2(0.25, 0.25)
+limit_top = -1400
+limit_bottom = 2200
+script = ExtResource("3_yw83d")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_ar31g")]
 position = Vector2(-1317, -39)
@@ -35,72 +42,8 @@ texture = ExtResource("2_kr30s")
 position = Vector2(329.5, 539)
 shape = SubResource("RectangleShape2D_ppurd")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="world"]
-position = Vector2(-211, -228)
-scale = Vector2(2.48, 2.48)
-shape = SubResource("RectangleShape2D_pbtko")
+[node name="grapple point" parent="." instance=ExtResource("3_kr30s")]
+position = Vector2(-463, -483)
 
-[node name="Icon2" type="Sprite2D" parent="world/CollisionShape2D2"]
-position = Vector2(-0.80645, 0)
-scale = Vector2(0.403226, 0.403226)
-texture = ExtResource("2_kr30s")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="world"]
-position = Vector2(-2247, 1451)
-scale = Vector2(2.48, 2.48)
-shape = SubResource("RectangleShape2D_pbtko")
-
-[node name="Icon2" type="Sprite2D" parent="world/CollisionShape2D3"]
-position = Vector2(-0.80645, 0)
-scale = Vector2(0.403226, 0.403226)
-texture = ExtResource("2_kr30s")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="world"]
-position = Vector2(-342, 1618)
-scale = Vector2(2.48, 2.48)
-shape = SubResource("RectangleShape2D_pbtko")
-
-[node name="Icon2" type="Sprite2D" parent="world/CollisionShape2D4"]
-position = Vector2(-0.80645, 0)
-scale = Vector2(0.403226, 0.403226)
-texture = ExtResource("2_kr30s")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="world"]
-position = Vector2(-1419, 2469)
-scale = Vector2(2.48, 2.48)
-shape = SubResource("RectangleShape2D_pbtko")
-
-[node name="Icon2" type="Sprite2D" parent="world/CollisionShape2D6"]
-position = Vector2(-0.80645, 0)
-scale = Vector2(0.403226, 0.403226)
-texture = ExtResource("2_kr30s")
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="world"]
-position = Vector2(1147, 2250)
-scale = Vector2(2.48, 2.48)
-shape = SubResource("RectangleShape2D_pbtko")
-
-[node name="Icon2" type="Sprite2D" parent="world/CollisionShape2D7"]
-position = Vector2(-0.80645, 0)
-scale = Vector2(0.403226, 0.403226)
-texture = ExtResource("2_kr30s")
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="world"]
-position = Vector2(-281, 2833)
-scale = Vector2(2.48, 2.48)
-shape = SubResource("RectangleShape2D_pbtko")
-
-[node name="Icon2" type="Sprite2D" parent="world/CollisionShape2D8"]
-position = Vector2(-0.80645, 0)
-scale = Vector2(0.403226, 0.403226)
-texture = ExtResource("2_kr30s")
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="world"]
-position = Vector2(-2458, 2727)
-scale = Vector2(2.48, 2.48)
-shape = SubResource("RectangleShape2D_pbtko")
-
-[node name="Icon2" type="Sprite2D" parent="world/CollisionShape2D9"]
-position = Vector2(-0.80645, 0)
-scale = Vector2(0.403226, 0.403226)
-texture = ExtResource("2_kr30s")
+[node name="grapple_point_spawner" type="Node2D" parent="."]
+script = ExtResource("5_100jw")
