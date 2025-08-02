@@ -4,13 +4,10 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var arm = $Arm
 @onready var score_popup: Label = $Label
-@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 const SPEED = 500.0
 const JUMP_VELOCITY = -600.0
 
-var score: int = 0
-var score_mult: int = 1
 
 var hook_pos = Vector2()
 var hooked = false
@@ -109,7 +106,6 @@ func _physics_process(delta: float) -> void:
 		arm.visible = false
 		spinVel = move_toward(spinVel, spinInput * MAX_SPIN_SPEED, SPIN_ACCEL * delta)
 		$AnimatedSprite2D.rotate(deg_to_rad(spinVel) * delta)
-		collision_shape_2d.rotation = $AnimatedSprite2D.rotation
 	
 	detectFlip()
 	handleSplitOrStar()
@@ -249,7 +245,6 @@ func handleSplitOrStar():
 		else:
 			print("FINISHED SPLITS")
 			print("time: " + str((Time.get_ticks_msec() - splitKeyPressTime)/1000.0).pad_decimals(1))
-			addScore(100)
 			handleAnimations("airAnimation")
 		isDoingSplits = false
 	elif Input.is_action_pressed("splits_star") and doingSplitInput:
@@ -299,5 +294,3 @@ func handleAnimations(animName: String):
 	elif animName == "grapple":
 		animated_sprite.play("grapple")
 			
-func addScore(value):
-	score += value * score_mult
