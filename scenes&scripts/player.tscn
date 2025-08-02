@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dtpghtphnrtur"]
+[gd_scene load_steps=23 format=3 uid="uid://dtpghtphnrtur"]
 
 [ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
 [ext_resource type="AudioStream" uid="uid://c058cbrle7v3i" path="res://sfx/jump.wav" id="3_cs8mv"]
@@ -43,6 +43,18 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("5_mvksm")
 region = Rect2(96, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_seiki"]
+atlas = ExtResource("5_mvksm")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rsf1m"]
+atlas = ExtResource("5_mvksm")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkbhq"]
+atlas = ExtResource("5_mvksm")
+region = Rect2(64, 64, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_mr2mj"]
 animations = [{
 "frames": [{
@@ -54,7 +66,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"grapple",
-"speed": 5.0
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -91,6 +103,30 @@ animations = [{
 "loop": true,
 "name": &"run",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_seiki")
+}],
+"loop": true,
+"name": &"splits_noGrapple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rsf1m")
+}],
+"loop": true,
+"name": &"splits_whileGrapple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkbhq")
+}],
+"loop": true,
+"name": &"star",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jebud"]
@@ -316,7 +352,8 @@ stream = ExtResource("4_83f1l")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(7.5625, 7.5625)
 sprite_frames = SubResource("SpriteFrames_mr2mj")
-animation = &"idle"
+animation = &"splits_whileGrapple"
+frame_progress = 0.38304
 
 [node name="Arm" type="AnimatedSprite2D" parent="."]
 visible = false

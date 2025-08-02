@@ -20,7 +20,10 @@ var previousRotation: float = 0
 @export var MAX_SPIN_SPEED: float = 270
 const SPIN_ACCEL: float = 720
 
-
+#split/star vars
+var splitKeyPressTime: int = 0 #in msecs
+var isDoingSplits: bool = false
+var doingSplitInput: bool = false
 
 @export var GRAPPLE_ACCEL_MULT: float = 1
 @export var ROPE_STIFFNESS: float = 0.7
@@ -45,9 +48,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		$JumpAudio.play()
-	
-	if not is_on_floor() and not hooked:
-		animated_sprite.play("jump")
+		handleAnimations("airAnimation")
+	#if not is_on_floor() and not hooked:
+		#handleAnimations("jump")
 
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -61,10 +64,7 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = true
 
 	if is_on_floor():
-		if direction == 0:
-			animated_sprite.play("idle")
-		else:
-			animated_sprite.play("run")
+		handleAnimations("onGround")
 		
 
 
@@ -104,6 +104,7 @@ func _physics_process(delta: float) -> void:
 		$AnimatedSprite2D.rotate(deg_to_rad(spinVel) * delta)
 	
 	detectFlip()
+	handleSplitOrStar()
 	
 	queue_redraw()
 	
@@ -132,11 +133,10 @@ func hook():
 	
 	if Input.is_action_just_pressed("left_click"):
 		hook_pos = get_hook_pos()
-		if not is_on_floor():
-			animated_sprite.play("grapple")
 		#print(hook_pos)
 		if hook_pos:
 			hooked = true
+			handleAnimations("grapple")
 			$GrabAudio.play()
 			current_rope_length = global_position.distance_to(hook_pos)
 	if Input.is_action_just_released("left_click") and hooked:
@@ -144,8 +144,10 @@ func hook():
 		arm.visible = false
 		if velocity.y < 0:
 			$WEeeeeee.play()
-	elif Input.is_action_just_released("left_click"):
-		animated_sprite.play("idle")
+		handleAnimations("airAnimation")
+		
+	#elif Input.is_action_just_released("left_click"):
+	#	animated_sprite.play("idle")
 		
 	
 func get_hook_pos():
@@ -222,8 +224,67 @@ func detectFlip():
 			totalFlipRotation = 0
 			$trickComplete.play()
 			#will put something else here later
-		
 		#print(totalFlipRotation)
-		
-		
-		
+
+func handleSplitOrStar():
+	if Input.is_action_just_pressed("splits_star") and not is_on_floor():
+		splitKeyPressTime = Time.get_ticks_msec()
+		doingSplitInput = true
+	
+	if Input.is_action_just_released("splits_star"):
+		doingSplitInput = false
+		if Time.get_ticks_msec() - splitKeyPressTime < 100:
+			print("DID STAR")
+			handleAnimations("star")
+		else:
+			print("FINISHED SPLITS")
+			print("time: " + str((Time.get_ticks_msec() - splitKeyPressTime)/1000.0).pad_decimals(1))
+			handleAnimations("airAnimation")
+		isDoingSplits = false
+	elif Input.is_action_pressed("splits_star") and doingSplitInput:
+		if Time.get_ticks_msec() - splitKeyPressTime > 100:
+			if not isDoingSplits:
+				print("STARTING SPLITS")
+				isDoingSplits = true
+				handleAnimations("split")
+				
+func handleAnimations(animName: String):
+	if animName == "unhook":
+		if is_on_floor():
+			handleAnimations("onGround")
+		else:
+			handleAnimations("airAnimation")
+	elif animName == "onGround":
+		if abs(velocity.x) >= 0.1:
+			handleAnimations("run")
+		else:
+			handleAnimations("idle")
+	elif animName == "airAnimation":
+		if hooked:
+			handleAnimations("grapple")
+		else:
+			handleAnimations("jump")
+	
+	
+	if animName == "jump":
+		animated_sprite.play("jump")
+	elif animName == "idle":
+		animated_sprite.play("idle")
+	elif animName == "run":
+		animated_sprite.play("run")
+	elif animName == "split":
+		if not hooked:
+			animated_sprite.play("splits_noGrapple")
+		else:
+			animated_sprite.play("splits_whileGrapple")
+	elif animName == "star":
+		animated_sprite.play("star")
+		await get_tree().create_timer(1).timeout
+		if animated_sprite.animation == "star":
+			if is_on_floor():
+				handleAnimations("onGround")
+			else:
+				handleAnimations("airAnimation")
+	elif animName == "grapple":
+		animated_sprite.play("grapple")
+			
