@@ -12,11 +12,22 @@ script = ExtResource("1_unwmh")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
 scale = Vector2(1.179, 0.613)
 shape = SubResource("CircleShape2D_lstjy")
 
 [node name="Hoop" type="Sprite2D" parent="."]
-rotation = 1.5708
+z_index = -1
+position = Vector2(-4, 0)
 texture = ExtResource("2_unwmh")
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 32)
+
+[node name="Hoop2" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(4, 0)
+texture = ExtResource("2_unwmh")
+region_enabled = true
+region_rect = Rect2(8, 0, 8, 32)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
