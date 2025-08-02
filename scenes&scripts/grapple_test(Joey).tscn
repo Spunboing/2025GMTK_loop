@@ -1,21 +1,42 @@
-[gd_scene load_steps=7 format=3 uid="uid://srsec5qg8pn0"]
+[gd_scene load_steps=11 format=3 uid="uid://srsec5qg8pn0"]
 
 [ext_resource type="PackedScene" uid="uid://dtpghtphnrtur" path="res://scenes&scripts/player.tscn" id="1_ar31g"]
 [ext_resource type="Texture2D" uid="uid://c2duf34wchcnf" path="res://icon.svg" id="2_kr30s"]
+[ext_resource type="PackedScene" uid="uid://dwiujqnqbvrr4" path="res://scenes&scripts/death_barrier.tscn" id="2_wb70l"]
 [ext_resource type="PackedScene" uid="uid://fjjqrhtpl07o" path="res://scenes&scripts/grapple_point.tscn" id="3_kr30s"]
 [ext_resource type="Script" uid="uid://w1a2n7dqfdh7" path="res://scenes&scripts/camera_2d.gd" id="3_yw83d"]
+[ext_resource type="Script" uid="uid://bhtc8d4j8virj" path="res://scenes&scripts/obstacle_spawner.gd" id="4_100jw"]
 [ext_resource type="Script" uid="uid://bfcj8sb8nrpxh" path="res://scenes&scripts/grapple_point_spawner.gd" id="5_100jw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n0tpe"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vqadq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ppurd"]
 size = Vector2(3527, 556)
 
 [node name="grapple_test" type="Node2D"]
 
+[node name="death barrier2" parent="." instance=ExtResource("2_wb70l")]
+position = Vector2(-5752, 58)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="death barrier2"]
+position = Vector2(1730, -1004)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_n0tpe")
+
+[node name="death barrier" parent="." instance=ExtResource("2_wb70l")]
+position = Vector2(-415, 1773)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="death barrier"]
+position = Vector2(107, 2000)
+shape = SubResource("WorldBoundaryShape2D_vqadq")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1317, -39)
 zoom = Vector2(0.25, 0.25)
 limit_top = -1400
-limit_bottom = 2200
+limit_bottom = 1500
 script = ExtResource("3_yw83d")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_ar31g")]
@@ -47,3 +68,6 @@ position = Vector2(-463, -483)
 
 [node name="grapple_point_spawner" type="Node2D" parent="."]
 script = ExtResource("5_100jw")
+
+[node name="obstacle_spawner" type="Node2D" parent="."]
+script = ExtResource("4_100jw")

@@ -1,5 +1,6 @@
 extends Node
 
+
 var highest_score: int = 0
 var first_play: bool = false
 

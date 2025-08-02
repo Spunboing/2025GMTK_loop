@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://xvp7ettpm0to"]
 
-[ext_resource type="Script" path="res://scenes&scripts/obstacles/fireball.gd" id="1_jah63"]
+[ext_resource type="Script" uid="uid://dhw1xcayl6h3e" path="res://scenes&scripts/obstacles/fireball.gd" id="1_jah63"]
 [ext_resource type="Texture2D" uid="uid://cdbpomi70b5eo" path="res://sprites/tile_0138.png" id="2_jah63"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qf7ev"]
@@ -46,13 +46,14 @@ _data = {
 
 [node name="Fireball" type="Node2D"]
 script = ExtResource("1_jah63")
-speed = 25
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(9.94, 9.94)
 texture = ExtResource("2_jah63")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("CircleShape2D_qf7ev")

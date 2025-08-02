@@ -11,7 +11,7 @@ const JUMP_VELOCITY = -600.0
 
 var hook_pos = Vector2()
 var hooked = false
-var ROPE_LENGTH = 1000
+var ROPE_LENGTH = 4000
 var current_rope_length
 
 var spinVel := 0.0
