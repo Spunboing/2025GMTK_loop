@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=4 uid="uid://bmpr5pskkmlk8"]
+[gd_scene load_steps=18 format=4 uid="uid://srsec5qg8pn0"]
 
+[ext_resource type="Texture2D" uid="uid://bbja2gytenvch" path="res://assets/crowd.png" id="1_am0sn"]
 [ext_resource type="PackedScene" uid="uid://dtpghtphnrtur" path="res://scenes&scripts/player.tscn" id="1_ar31g"]
 [ext_resource type="Texture2D" uid="uid://bga1hsm8ci45m" path="res://sprites/red_drapes.png" id="1_n0tpe"]
 [ext_resource type="FontFile" uid="uid://b4itt4upgds1c" path="res://assets/Minecraft.ttf" id="1_vqadq"]
@@ -10,13 +11,49 @@
 [ext_resource type="TileSet" uid="uid://vy22ujmksf2a" path="res://sprites/new_tile_set.tres" id="4_wb70l"]
 [ext_resource type="Script" uid="uid://bfcj8sb8nrpxh" path="res://scenes&scripts/grapple_point_spawner.gd" id="5_100jw"]
 [ext_resource type="AudioStream" uid="uid://c6hllxyf8v18n" path="res://music/Gameplay.wav" id="9_vqadq"]
-[ext_resource type="Script" uid="uid://dep4kg5tar551" path="res://scenes&scripts/label.gd" id="10_hkk1p"]
+[ext_resource type="Script" path="res://scenes&scripts/label.gd" id="10_hkk1p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4sbr"]
+atlas = ExtResource("1_am0sn")
+region = Rect2(0, 0, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oycc7"]
+atlas = ExtResource("1_am0sn")
+region = Rect2(144, 0, 144, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8esk7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4sbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oycc7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n0tpe"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vqadq"]
 
 [node name="grapple_test" type="Node2D"]
+
+[node name="crowdParallax" type="Parallax2D" parent="."]
+scale = Vector2(29.847, 29.847)
+scroll_scale = Vector2(1, 0)
+scroll_offset = Vector2(0, 608)
+repeat_size = Vector2(36, 0)
+repeat_times = 5
+
+[node name="crowd" type="AnimatedSprite2D" parent="crowdParallax"]
+z_index = 2
+position = Vector2(0.268034, 26.0328)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_8esk7")
+autoplay = "default"
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 z_index = -1
@@ -50,7 +87,7 @@ shape = SubResource("WorldBoundaryShape2D_vqadq")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-1317, -39)
-zoom = Vector2(0.25, 0.25)
+zoom = Vector2(0.3, 0.3)
 limit_top = -1400
 limit_bottom = 1500
 script = ExtResource("3_yw83d")
@@ -95,6 +132,7 @@ autoplay = true
 [node name="Label" type="Label" parent="CanvasLayer"]
 offset_right = 40.0
 offset_bottom = 23.0
+scale = Vector2(0.495, 0.495)
 theme_override_fonts/font = ExtResource("1_vqadq")
 theme_override_font_sizes/font_size = 128
 text = "0000000"

@@ -1,6 +1,4 @@
-
-[gd_scene load_steps=25 format=3 uid="uid://dtpghtphnrtur"]
-
+[gd_scene load_steps=32 format=3 uid="uid://dtpghtphnrtur"]
 
 [ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
 [ext_resource type="AudioStream" uid="uid://bp37oq5qglxxo" path="res://sfx/jump sfx.wav" id="2_seiki"]
@@ -16,7 +14,7 @@ size = Vector2(77, 241)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4j65y"]
 atlas = ExtResource("5_mvksm")
-region = Rect2(128, 0, 32, 32)
+region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mr2mj"]
 atlas = ExtResource("5_mvksm")
@@ -61,10 +59,6 @@ region = Rect2(0, 64, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gkbhq"]
 atlas = ExtResource("5_mvksm")
 region = Rect2(64, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4j65y"]
-atlas = ExtResource("5_mvksm")
-region = Rect2(96, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e8oui"]
 atlas = ExtResource("5_mvksm")
@@ -186,6 +180,21 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_mj8n8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dw6d4"]
+gradient = SubResource("Gradient_mj8n8")
+width = 1
+
+[sub_resource type="Curve" id="Curve_pajsh"]
+_data = [Vector2(0, 1), 0.0, 0.0439451, 0, 0, Vector2(1, 0.11236), -3.05618, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_rsf1m"]
+offsets = PackedFloat32Array(0.573333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ij6vw")
@@ -412,7 +421,6 @@ position = Vector2(64, -200)
 stream = ExtResource("7_mj8n8")
 volume_db = -16.934
 autoplay = true
-stream_paused = true
 
 [node name="Label" type="Label" parent="."]
 offset_left = 64.0
@@ -421,3 +429,23 @@ offset_right = 104.0
 offset_bottom = -118.0
 theme_override_fonts/font = ExtResource("7_seiki")
 theme_override_font_sizes/font_size = 64
+
+[node name="hookParticles" type="CPUParticles2D" parent="."]
+position = Vector2(81, 0)
+emitting = false
+amount = 6
+texture = SubResource("GradientTexture1D_dw6d4")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, 600)
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+scale_amount_min = 15.0
+scale_amount_max = 20.0
+scale_amount_curve = SubResource("Curve_pajsh")
+color_ramp = SubResource("Gradient_rsf1m")

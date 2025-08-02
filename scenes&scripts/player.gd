@@ -150,6 +150,8 @@ func hook():
 		if hook_pos:
 			hooked = true
 			handleAnimations("grapple")
+			$hookParticles.global_position = hook_pos
+			$hookParticles.emitting = true
 			$GrabAudio.play()
 			current_rope_length = global_position.distance_to(hook_pos)
 	if Input.is_action_just_released("left_click") and hooked:
@@ -315,4 +317,3 @@ func handleAnimations(animName: String):
 
 func add_score(value):
 	score += value*score_mult
-
