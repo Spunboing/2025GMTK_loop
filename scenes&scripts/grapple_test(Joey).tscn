@@ -1,19 +1,36 @@
-[gd_scene load_steps=11 format=4 uid="uid://srsec5qg8pn0"]
+[gd_scene load_steps=13 format=4 uid="uid://srsec5qg8pn0"]
 
 [ext_resource type="PackedScene" uid="uid://dtpghtphnrtur" path="res://scenes&scripts/player.tscn" id="1_ar31g"]
 [ext_resource type="Texture2D" uid="uid://bga1hsm8ci45m" path="res://sprites/red_drapes.png" id="1_n0tpe"]
+[ext_resource type="FontFile" uid="uid://b4itt4upgds1c" path="res://assets/Minecraft.ttf" id="1_vqadq"]
 [ext_resource type="PackedScene" uid="uid://dwiujqnqbvrr4" path="res://scenes&scripts/death_barrier.tscn" id="2_wb70l"]
 [ext_resource type="PackedScene" uid="uid://fjjqrhtpl07o" path="res://scenes&scripts/grapple_point.tscn" id="3_kr30s"]
 [ext_resource type="Script" uid="uid://w1a2n7dqfdh7" path="res://scenes&scripts/camera_2d.gd" id="3_yw83d"]
 [ext_resource type="Script" uid="uid://bhtc8d4j8virj" path="res://scenes&scripts/obstacle_spawner.gd" id="4_100jw"]
 [ext_resource type="TileSet" uid="uid://vy22ujmksf2a" path="res://sprites/new_tile_set.tres" id="4_wb70l"]
 [ext_resource type="Script" uid="uid://bfcj8sb8nrpxh" path="res://scenes&scripts/grapple_point_spawner.gd" id="5_100jw"]
+[ext_resource type="Script" uid="uid://dep4kg5tar551" path="res://scenes&scripts/label.gd" id="10_hkk1p"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n0tpe"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vqadq"]
 
 [node name="grapple_test" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+texture_filter = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 91.0
+offset_bottom = 26.0
+scale = Vector2(3, 3)
+theme_override_fonts/font = ExtResource("1_vqadq")
+theme_override_font_sizes/font_size = 16
+text = "000000000"
+horizontal_alignment = 1
+script = ExtResource("10_hkk1p")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 z_index = -1
