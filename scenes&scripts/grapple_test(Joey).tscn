@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://srsec5qg8pn0"]
+[gd_scene load_steps=12 format=4 uid="uid://srsec5qg8pn0"]
 
 [ext_resource type="PackedScene" uid="uid://dtpghtphnrtur" path="res://scenes&scripts/player.tscn" id="1_ar31g"]
 [ext_resource type="Texture2D" uid="uid://bga1hsm8ci45m" path="res://sprites/red_drapes.png" id="1_n0tpe"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bhtc8d4j8virj" path="res://scenes&scripts/obstacle_spawner.gd" id="4_100jw"]
 [ext_resource type="TileSet" uid="uid://vy22ujmksf2a" path="res://sprites/new_tile_set.tres" id="4_wb70l"]
 [ext_resource type="Script" uid="uid://bfcj8sb8nrpxh" path="res://scenes&scripts/grapple_point_spawner.gd" id="5_100jw"]
+[ext_resource type="AudioStream" uid="uid://k1d5pdwkv6fm" path="res://music/Gameplay.wav" id="9_vqadq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_n0tpe"]
 
@@ -82,4 +83,7 @@ script = ExtResource("5_100jw")
 [node name="obstacle_spawner" type="Node2D" parent="."]
 script = ExtResource("4_100jw")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_vqadq")
+volume_db = -12.54
+autoplay = true
