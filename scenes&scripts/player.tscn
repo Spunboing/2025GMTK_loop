@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dtpghtphnrtur"]
+[gd_scene load_steps=29 format=3 uid="uid://dtpghtphnrtur"]
 
 [ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
 [ext_resource type="AudioStream" uid="uid://bp37oq5qglxxo" path="res://sfx/jump sfx.wav" id="2_seiki"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://by3htnp5p6607" path="res://sprites/loopguy.png" id="5_mvksm"]
 [ext_resource type="AudioStream" uid="uid://d35ef1fx3xj1q" path="res://sfx/whoosh-jump.wav" id="6_dw6d4"]
 [ext_resource type="FontFile" uid="uid://bit32tvpkg3ow" path="res://assets/ari-w9500-bold.ttf" id="7_seiki"]
+[ext_resource type="Script" uid="uid://2gusxynei5w4" path="res://scenes&scripts/score_popup.gd" id="8_mj8n8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ij6vw"]
 size = Vector2(77, 241)
@@ -393,7 +394,7 @@ stream = ExtResource("4_seiki")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(7.5625, 7.5625)
 sprite_frames = SubResource("SpriteFrames_mr2mj")
-animation = &"twirl"
+animation = &"idle"
 
 [node name="Arm" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -404,10 +405,19 @@ sprite_frames = SubResource("SpriteFrames_4j65y")
 [node name="WEeeeeee" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_dw6d4")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 64.0
-offset_top = -200.0
-offset_right = 104.0
-offset_bottom = -118.0
+[node name="score_popup" type="Label" parent="."]
+offset_left = 53.0
+offset_top = -122.0
+offset_right = 175.0
+offset_bottom = -40.0
+theme_override_colors/font_color = Color(0.870387, 1.44392e-06, 1.2514e-06, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
 theme_override_fonts/font = ExtResource("7_seiki")
 theme_override_font_sizes/font_size = 64
+script = ExtResource("8_mj8n8")
+
+[node name="score_time" type="Timer" parent="score_popup"]
+wait_time = 0.5
+
+[connection signal="timeout" from="score_popup/score_time" to="score_popup" method="_on_score_time_timeout"]
