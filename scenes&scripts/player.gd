@@ -97,13 +97,13 @@ func _physics_process(delta: float) -> void:
 		swing(delta)
 		if not is_on_floor():
 			arm.visible = true
-		arm.rotation = ((hook_pos - arm.global_position).angle()) + 90
+		arm.global_rotation = ((hook_pos - arm.global_position).angle()) - 67.5
 		spinVel = 0
 		#velocity *= .975 #Swing speed
 		
 	var spinInput = Input.get_axis("flip_left", "flip_right")
 	if not is_on_floor() and not hooked:
-		#arm.visible = false
+		arm.visible = false
 		spinVel = move_toward(spinVel, spinInput * MAX_SPIN_SPEED, SPIN_ACCEL * delta)
 		$AnimatedSprite2D.rotate(deg_to_rad(spinVel) * delta)
 	
@@ -120,7 +120,7 @@ func _draw():
 	if hooked:
 		#print(position)
 		#print(to_local(hook_pos))
-		draw_line(arm.position, to_local(hook_pos), Color(0.35, 0.7, 0.9), 3, true) #cyan
+		draw_line(arm.position, to_local(hook_pos), Color(1, 1, 1), 10, true) #cyan
 	else:
 		return
 		#what is this? why is there code below a return?

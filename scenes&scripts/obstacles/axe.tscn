@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d073uyshv0fd0"]
 
-[ext_resource type="Script" uid="uid://dhw1xcayl6h3e" path="res://scenes&scripts/obstacles/fireball.gd" id="1_ujcj5"]
+[ext_resource type="Script" uid="uid://drsugdv4w03nf" path="res://scenes&scripts/obstacles/throwable.gd" id="1_bsk73"]
 [ext_resource type="Texture2D" uid="uid://csrfhv2g0ox2o" path="res://sprites/tile_0127.png" id="2_bsk73"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rsp8i"]
@@ -45,7 +45,7 @@ _data = {
 }
 
 [node name="Axe" type="Node2D"]
-script = ExtResource("1_ujcj5")
+script = ExtResource("1_bsk73")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(9.94, 9.94)

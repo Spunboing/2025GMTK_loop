@@ -319,9 +319,7 @@ sprite_frames = SubResource("SpriteFrames_mr2mj")
 animation = &"idle"
 
 [node name="Arm" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(0, -23)
-rotation = 0.00660015
 scale = Vector2(7.562, 7.562)
 sprite_frames = SubResource("SpriteFrames_4j65y")
 
