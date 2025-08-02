@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://fjjqrhtpl07o"]
 
-[ext_resource type="Texture2D" uid="uid://c2duf34wchcnf" path="res://icon.svg" id="1_8lbqe"]
+[ext_resource type="Texture2D" uid="uid://spdb1l7lbhtu" path="res://sprites/grabby.png" id="1_8lbqe"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1nld"]
-size = Vector2(129, 126)
+[sub_resource type="CircleShape2D" id="CircleShape2D_y1nld"]
+radius = 32.1965
 
 [node name="grapple point" type="StaticBody2D" groups=["point spawner"]]
 z_index = -1
@@ -11,10 +11,10 @@ scale = Vector2(2.6533, 2.6533)
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -1)
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_y1nld")
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
 texture = ExtResource("1_8lbqe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.224026, 0.0355797)
+shape = SubResource("CircleShape2D_y1nld")

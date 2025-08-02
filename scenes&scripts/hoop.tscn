@@ -1,21 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://ll1dqwr7i7cx"]
 
 [ext_resource type="Script" uid="uid://ba4hyw6px38od" path="res://scenes&scripts/hoop.gd" id="1_unwmh"]
-[ext_resource type="Texture2D" uid="uid://by3htnp5p6607" path="res://sprites/loopguy.png" id="2_lvc1k"]
+[ext_resource type="Texture2D" uid="uid://b8276voh14u7c" path="res://sprites/hoop.png" id="2_unwmh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lstjy"]
+radius = 13.5705
 
 [node name="hoop" type="Node2D"]
 script = ExtResource("1_unwmh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.141632, 0.141632)
-texture = ExtResource("2_lvc1k")
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(1.17903, 0.643254)
+scale = Vector2(1.179, 0.613)
 shape = SubResource("CircleShape2D_lstjy")
+
+[node name="Hoop" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_unwmh")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
