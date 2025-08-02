@@ -82,3 +82,5 @@ script = ExtResource("5_100jw")
 
 [node name="obstacle_spawner" type="Node2D" parent="."]
 script = ExtResource("4_100jw")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
