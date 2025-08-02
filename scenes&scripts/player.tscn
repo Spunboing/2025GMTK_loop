@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dtpghtphnrtur"]
+[gd_scene load_steps=28 format=3 uid="uid://dtpghtphnrtur"]
 
 [ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
 [ext_resource type="AudioStream" uid="uid://bp37oq5qglxxo" path="res://sfx/jump sfx.wav" id="2_seiki"]
@@ -58,6 +58,22 @@ region = Rect2(0, 64, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_gkbhq"]
 atlas = ExtResource("5_mvksm")
 region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4j65y"]
+atlas = ExtResource("5_mvksm")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8oui"]
+atlas = ExtResource("5_mvksm")
+region = Rect2(128, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2l5cq"]
+atlas = ExtResource("5_mvksm")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k82i"]
+atlas = ExtResource("5_mvksm")
+region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mr2mj"]
 animations = [{
@@ -134,6 +150,23 @@ animations = [{
 "loop": true,
 "name": &"star",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4j65y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8oui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2l5cq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k82i")
+}],
+"loop": true,
+"name": &"twirl",
+"speed": 24.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jebud"]
@@ -155,6 +188,7 @@ animations = [{
 script = ExtResource("1_ij6vw")
 
 [node name="Raycast" type="Node2D" parent="."]
+visible = false
 
 [node name="RayCast2D" type="RayCast2D" parent="Raycast" groups=["raycast"]]
 rotation = -2.35619
@@ -359,11 +393,10 @@ stream = ExtResource("4_seiki")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(7.5625, 7.5625)
 sprite_frames = SubResource("SpriteFrames_mr2mj")
-animation = &"grapple"
-frame = 2
-frame_progress = 1.0
+animation = &"twirl"
 
 [node name="Arm" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(0, -23)
 scale = Vector2(7.562, 7.562)
 sprite_frames = SubResource("SpriteFrames_4j65y")
