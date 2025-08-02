@@ -6,45 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bga1hsm8ci45m" path="res://sprites/red_drapes.png" id="4_r3y0w"]
 [ext_resource type="AudioStream" uid="uid://4s5emxdc4kl8" path="res://music/Pocket.wav" id="5_j6qfw"]
 
-[sub_resource type="Animation" id="Animation_j6qfw"]
-resource_name = "opensesame"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:size")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(96, 96)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-847, -368), Vector2(-1465, -368)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("TextureRect2:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, -368), Vector2(610, -368)]
-}
-
 [sub_resource type="Animation" id="Animation_jurh7"]
 length = 0.001
 tracks/0/type = "value"
@@ -82,6 +43,45 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, -368)]
+}
+
+[sub_resource type="Animation" id="Animation_j6qfw"]
+resource_name = "opensesame"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(96, 96)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-847, -368), Vector2(-1465, -368)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -368), Vector2(610, -368)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rlfg8"]
@@ -134,16 +134,17 @@ libraries = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -847.0
+offset_left = -1465.0
 offset_top = -368.0
-offset_right = -751.0
+offset_right = -1369.0
 offset_bottom = -272.0
 scale = Vector2(8.85011, 8.85011)
 texture = ExtResource("4_r3y0w")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 610.0
 offset_top = -368.0
-offset_right = 96.0
+offset_right = 706.0
 offset_bottom = -272.0
 scale = Vector2(8.85011, 8.85011)
 texture = ExtResource("4_r3y0w")
