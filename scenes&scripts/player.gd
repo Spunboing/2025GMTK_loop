@@ -8,6 +8,8 @@ extends CharacterBody2D
 const SPEED = 500.0
 const JUMP_VELOCITY = -600.0
 
+var score: int = 0
+var score_mult: int = 1
 
 var hook_pos = Vector2()
 var hooked = false
@@ -231,8 +233,12 @@ func detectFlip():
 			spinDelta += 360
 		
 		totalFlipRotation += rad_to_deg(spinDelta)
-		if abs(totalFlipRotation) >= 330:
-			completedFlip()
+
+		if abs(totalFlipRotation) >= 360:
+			print("DID A FLIP")
+			add_score(100)
+			totalFlipRotation = 0
+			$trickComplete.play()
 			#will put something else here later
 		#print(totalFlipRotation)
 
@@ -306,5 +312,7 @@ func handleAnimations(animName: String):
 		else:
 			animated_sprite.play("grapple")
 			
-	
-	
+
+func add_score(value):
+	score += value*score_mult
+

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="loop"
-run/main_scene="uid://1xff5pumhoo5"
+run/main_scene="uid://bmpr5pskkmlk8"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/image="uid://caynxxfxhu060"
 config/icon="res://icon.svg"
