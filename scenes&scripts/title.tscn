@@ -159,16 +159,17 @@ libraries = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -847.0
+offset_left = -1465.0
 offset_top = -368.0
-offset_right = -751.0
+offset_right = -1369.0
 offset_bottom = -272.0
 scale = Vector2(8.85011, 8.85011)
 texture = ExtResource("4_r3y0w")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 610.0
 offset_top = -368.0
-offset_right = 96.0
+offset_right = 706.0
 offset_bottom = -272.0
 scale = Vector2(8.85011, 8.85011)
 texture = ExtResource("4_r3y0w")

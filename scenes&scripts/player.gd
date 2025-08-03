@@ -6,6 +6,11 @@ extends CharacterBody2D
 @onready var score_popup: Label = $score_popup
 @onready var score_mult_timer: Timer = $score_mult_timer
 
+var consec_flip_count: int = 1
+var flip_count: int = 0
+var star_count: int = 0
+var split_count: int = 0
+
 const SPEED = 500.0
 const JUMP_VELOCITY = -600.0
 
@@ -224,6 +229,7 @@ func detectFlip():
 	if Input.is_action_just_pressed("flip_left") or Input.is_action_just_pressed("flip_right"):
 		totalFlipRotation = 0
 	elif Input.is_action_just_released("flip_left") or Input.is_action_just_released("flip_right"):
+		consec_flip_count = 1
 		if abs(totalFlipRotation) >= 300:
 			completedFlip()
 	if isFlipping and Input.get_axis("flip_left", "flip_right") == 0:
@@ -244,11 +250,18 @@ func detectFlip():
 
 		if abs(totalFlipRotation) >= 360:
 			if isDoingStar:
-				addScore(200,2)
-			if isDoingSplits:
-				addScore(200, 1.5)
+				addScore(200*consec_flip_count,2)
+				score_popup.text += "\nsplit/star combo! X" + str(consec_flip_count) 
+				consec_flip_count += 1
+			elif isDoingSplits:
+				addScore(200*consec_flip_count, 1.5)
+				score_popup.text += "\nsplit/flip combo! X" + str(consec_flip_count) 
+				consec_flip_count += 1
 			else:
-				addScore(200, 1)
+				addScore(200*consec_flip_count, 1)
+				if consec_flip_count > 1:
+					score_popup.text += "\n" + "flip X" + str(consec_flip_count) 
+				consec_flip_count += 1
 			print("DID A FLIP")
 			totalFlipRotation = 0
 			$trickComplete.play()
@@ -274,6 +287,7 @@ func handleSplitOrStar():
 			isDoingStar = true
 			print("DID STAR")
 			addScore(5,1)
+			star_count += 1
 			handleAnimations("star")
 		else:
 			if isDoingSplits && not isFlipping:
@@ -283,7 +297,8 @@ func handleSplitOrStar():
 				var splits_add: int = (split_time-fmod(split_time,.5))/.5*10 #50 points for splits, +10 every .5 seconds splits are held up to 350
 				if splits_add > 350:
 					splits_add = 350
-				addScore(50+splits_add,1) 
+				addScore(50+splits_add,1)
+				split_count += 1
 			handleAnimations("airAnimation")
 			isDoingSplits = false
 	elif Input.is_action_pressed("splits_star") and doingSplitInput:
@@ -340,13 +355,13 @@ func handleAnimations(animName: String):
 			
 
 func addScore(value, combo_mult):
+	print(value*score_mult*combo_mult)
 	score += value*score_mult*combo_mult
 	score_popup.activate(int(value*score_mult*combo_mult))
 
 func add_score_mult(multiplier):
 	score_mult += multiplier
 	score_mult_timer.start()
-
 
 func _on_score_mult_timer_timeout() -> void:
 	score_mult = 1
