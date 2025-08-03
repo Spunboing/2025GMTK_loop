@@ -11,8 +11,8 @@ var flip_count: int = 0
 var star_count: int = 0
 var split_count: int = 0
 
-const SPEED = 500.0
-const JUMP_VELOCITY = -600.0
+const SPEED = 750.0
+const JUMP_VELOCITY = -375.0
 
 var score: int = 0
 var score_mult: int = 1

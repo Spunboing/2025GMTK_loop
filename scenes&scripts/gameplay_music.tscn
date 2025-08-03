@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://evi6o5o83vca"]
+
+[ext_resource type="AudioStream" uid="uid://c6hllxyf8v18n" path="res://assets/music/Gameplay.wav" id="1_f6o0e"]
+[ext_resource type="Script" uid="uid://l6nea2wo73wj" path="res://scenes&scripts/gameplay_music.gd" id="2_ivlwj"]
+
+[node name="gameplay_music" type="AudioStreamPlayer"]
+stream = ExtResource("1_f6o0e")
+volume_db = -18.59
+script = ExtResource("2_ivlwj")

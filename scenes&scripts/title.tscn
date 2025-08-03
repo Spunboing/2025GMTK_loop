@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://1xff5pumhoo5"]
+[gd_scene load_steps=11 format=3 uid="uid://1xff5pumhoo5"]
 
 [ext_resource type="Script" uid="uid://c0rtfwooqw3u5" path="res://scenes&scripts/title.gd" id="1_i327d"]
 [ext_resource type="Texture2D" uid="uid://cuh0dxivpbpvf" path="res://assets/sprites/51TioqLkRnL._UF894,1000_QL80_.jpg" id="1_qtvll"]
 [ext_resource type="FontFile" uid="uid://cgb5knf88i4nc" path="res://assets/fonts/upheavtt.ttf" id="2_i327d"]
 [ext_resource type="Texture2D" uid="uid://by3htnp5p6607" path="res://assets/sprites/loopguy.png" id="2_jurh7"]
 [ext_resource type="Texture2D" uid="uid://bga1hsm8ci45m" path="res://assets/sprites/red_drapes.png" id="4_r3y0w"]
-[ext_resource type="AudioStream" uid="uid://4s5emxdc4kl8" path="res://assets/music/Pocket.wav" id="5_j6qfw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rlfg8"]
 atlas = ExtResource("2_jurh7")
@@ -159,23 +158,18 @@ libraries = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -1465.0
+offset_left = -847.0
 offset_top = -368.0
-offset_right = -1369.0
+offset_right = -751.0
 offset_bottom = -272.0
 scale = Vector2(8.85011, 8.85011)
 texture = ExtResource("4_r3y0w")
 
 [node name="TextureRect2" type="TextureRect" parent="."]
-offset_left = 610.0
 offset_top = -368.0
-offset_right = 706.0
+offset_right = 96.0
 offset_bottom = -272.0
 scale = Vector2(8.85011, 8.85011)
 texture = ExtResource("4_r3y0w")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_j6qfw")
-autoplay = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
