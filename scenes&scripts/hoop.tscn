@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ll1dqwr7i7cx"]
+[gd_scene load_steps=5 format=3 uid="uid://ll1dqwr7i7cx"]
 
 [ext_resource type="Script" uid="uid://ba4hyw6px38od" path="res://scenes&scripts/hoop.gd" id="1_unwmh"]
 [ext_resource type="Texture2D" uid="uid://b8276voh14u7c" path="res://assets/sprites/hoop.png" id="2_unwmh"]
+[ext_resource type="AudioStream" uid="uid://dlcg5eppfs68s" path="res://assets/sfx/hoop_sfx.mp3" id="3_lvc1k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lstjy"]
 radius = 13.5705
@@ -30,5 +31,10 @@ position = Vector2(4, 0)
 texture = ExtResource("2_unwmh")
 region_enabled = true
 region_rect = Rect2(8, 0, 8, 32)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_lvc1k")
+volume_db = 24.0
+bus = &"SFX"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
