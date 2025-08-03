@@ -28,7 +28,12 @@ const SPIN_ACCEL: float = 720
 var splitKeyPressTime: int = 0 #in msecs
 var isDoingSplits: bool = false
 var doingSplitInput: bool = false
+
 var isDoingStar: bool = false
+
+var lastCompletedSplitTime: int = 0
+
+
 
 @export var GRAPPLE_ACCEL_MULT: float = 1
 @export var ROPE_STIFFNESS: float = 0.7
@@ -113,6 +118,9 @@ func _physics_process(delta: float) -> void:
 	detectFlip()
 	handleSplitOrStar()
 	
+	print(velocity.length())
+	$windWhooshing.volume_db = clamp(remap(velocity.length(), 1000, 2500, -15, 0), -20, 0)
+	
 	queue_redraw()
 	
 	previousRotation = $AnimatedSprite2D.rotation
@@ -146,6 +154,8 @@ func hook():
 		if hook_pos:
 			hooked = true
 			handleAnimations("grapple")
+			$hookParticles.global_position = hook_pos
+			$hookParticles.emitting = true
 			$GrabAudio.play()
 			current_rope_length = global_position.distance_to(hook_pos)
 	if Input.is_action_just_released("left_click") and hooked:
@@ -212,6 +222,9 @@ func swing(delta):
 func detectFlip():
 	if Input.is_action_just_pressed("flip_left") or Input.is_action_just_pressed("flip_right"):
 		totalFlipRotation = 0
+	elif Input.is_action_just_released("flip_left") or Input.is_action_just_released("flip_right"):
+		if abs(totalFlipRotation) >= 300:
+			completedFlip()
 	
 	if Input.get_axis("flip_left", "flip_right") != 0 and not hooked:
 		if not isFlipping:
@@ -219,7 +232,6 @@ func detectFlip():
 			totalFlipRotation = 0
 		
 		var spinDelta = $AnimatedSprite2D.rotation - previousRotation
-		
 		#highkey stole this part from gemini but it looks right soo...
 		if spinDelta > 180:
 			spinDelta -= 360
@@ -227,6 +239,7 @@ func detectFlip():
 			spinDelta += 360
 		
 		totalFlipRotation += rad_to_deg(spinDelta)
+
 		if abs(totalFlipRotation) >= 360:
 			if isDoingStar:
 				addScore(200,2)
@@ -237,10 +250,16 @@ func detectFlip():
 			print("DID A FLIP")
 			totalFlipRotation = 0
 			$trickComplete.play()
+
 			
-		
+
 		#print(totalFlipRotation)
-		
+
+func completedFlip():
+	print("DID A FLIP")
+	totalFlipRotation = 0
+	$trickComplete.play()
+
 func handleSplitOrStar():
 	if Input.is_action_just_pressed("splits_star") and not is_on_floor():
 		splitKeyPressTime = Time.get_ticks_msec()
@@ -308,8 +327,14 @@ func handleAnimations(animName: String):
 				handleAnimations("airAnimation")
 				isDoingStar = false
 	elif animName == "grapple":
-		animated_sprite.play("grapple")
+		if isDoingSplits:
+			handleAnimations("split")
+		else:
+			animated_sprite.play("grapple")
 			
+
 func addScore(value, combo_mult):
 	score += value*score_mult*combo_mult
 	score_popup.activate(int(value*score_mult*combo_mult))
+=======
+
