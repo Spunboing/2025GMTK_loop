@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d10441djj270o"
-path="res://.godot/imported/Trickshot_Trapeze.icon.png-0c5e7019ffa6454394298375e5da149c.ctex"
+uid="uid://blc5yjcpx0kvj"
+path="res://.godot/imported/Trickshot_Trapeze.png-6cd392f6bf08b69bb9e4fca34cf3383e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Trapeze_Game HTML Build/Trickshot_Trapeze.icon.png"
-dest_files=["res://.godot/imported/Trickshot_Trapeze.icon.png-0c5e7019ffa6454394298375e5da149c.ctex"]
+source_file="res://Trickshot_Trapeze HTML Build/Trickshot_Trapeze.png"
+dest_files=["res://.godot/imported/Trickshot_Trapeze.png-6cd392f6bf08b69bb9e4fca34cf3383e.ctex"]
 
 [params]
 
