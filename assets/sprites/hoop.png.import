@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caynxxfxhu060"
-path="res://.godot/imported/godot-gmtk2025-dark.png-fcf9d40de47a2670aca823010a6cea99.ctex"
+uid="uid://b8276voh14u7c"
+path="res://.godot/imported/hoop.png-3e35de32c4cf8c234c60a605de27132e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes&scripts/godot-gmtk2025-dark.png"
-dest_files=["res://.godot/imported/godot-gmtk2025-dark.png-fcf9d40de47a2670aca823010a6cea99.ctex"]
+source_file="res://assets/sprites/hoop.png"
+dest_files=["res://.godot/imported/hoop.png-3e35de32c4cf8c234c60a605de27132e.ctex"]
 
 [params]
 

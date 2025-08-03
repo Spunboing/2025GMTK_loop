@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://xvp7ettpm0to"]
 
 [ext_resource type="Script" uid="uid://dhw1xcayl6h3e" path="res://scenes&scripts/obstacles/fireball.gd" id="1_jah63"]
-[ext_resource type="Texture2D" uid="uid://cdbpomi70b5eo" path="res://sprites/tile_0138.png" id="2_jah63"]
+[ext_resource type="Texture2D" uid="uid://cdbpomi70b5eo" path="res://assets/sprites/tile_0138.png" id="2_jah63"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qf7ev"]
 radius = 63.0
@@ -54,6 +54,7 @@ texture = ExtResource("2_jah63")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.649965, 0.649965)
 shape = SubResource("CircleShape2D_qf7ev")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

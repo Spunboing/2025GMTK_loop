@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://de76uekabtldr"
-path="res://.godot/imported/TrickComplete.wav-755ac613da7232ab1ba3588e7620c172.sample"
+path="res://.godot/imported/TrickComplete.wav-f85d432b258c3995bf1103416d3dc5ab.sample"
 
 [deps]
 
-source_file="res://sfx/TrickComplete.wav"
-dest_files=["res://.godot/imported/TrickComplete.wav-755ac613da7232ab1ba3588e7620c172.sample"]
+source_file="res://assets/sfx/TrickComplete.wav"
+dest_files=["res://.godot/imported/TrickComplete.wav-f85d432b258c3995bf1103416d3dc5ab.sample"]
 
 [params]
 

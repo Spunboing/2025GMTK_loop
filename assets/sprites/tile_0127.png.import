@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8276voh14u7c"
-path="res://.godot/imported/hoop.png-83e9a25ab6af8fe0c2523b249c34fbd3.ctex"
+uid="uid://csrfhv2g0ox2o"
+path="res://.godot/imported/tile_0127.png-a57e17809d2fab504630da7c35d8b4f1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/hoop.png"
-dest_files=["res://.godot/imported/hoop.png-83e9a25ab6af8fe0c2523b249c34fbd3.ctex"]
+source_file="res://assets/sprites/tile_0127.png"
+dest_files=["res://.godot/imported/tile_0127.png-a57e17809d2fab504630da7c35d8b4f1.ctex"]
 
 [params]
 

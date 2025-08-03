@@ -1,16 +1,15 @@
-
-[gd_scene load_steps=32 format=3 uid="uid://dtpghtphnrtur"]
-
+[gd_scene load_steps=34 format=3 uid="uid://dtpghtphnrtur"]
 
 [ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
-[ext_resource type="AudioStream" uid="uid://bp37oq5qglxxo" path="res://sfx/jump sfx.wav" id="2_seiki"]
-[ext_resource type="AudioStream" uid="uid://cudcwd2dj3gx7" path="res://sfx/grab sfx.wav" id="3_mj8n8"]
-[ext_resource type="AudioStream" uid="uid://de76uekabtldr" path="res://sfx/TrickComplete.wav" id="4_seiki"]
-[ext_resource type="Texture2D" uid="uid://by3htnp5p6607" path="res://sprites/loopguy.png" id="5_mvksm"]
-[ext_resource type="AudioStream" uid="uid://d35ef1fx3xj1q" path="res://sfx/whoosh-jump.wav" id="6_dw6d4"]
-[ext_resource type="AudioStream" uid="uid://bmvpl7bymsv1e" path="res://sfx/wind-sound-clip.mp3" id="7_mj8n8"]
-[ext_resource type="FontFile" uid="uid://bit32tvpkg3ow" path="res://assets/ari-w9500-bold.ttf" id="7_seiki"]
-[ext_resource type="Script" uid="uid://2gusxynei5w4" path="res://scenes&scripts/score_popup.gd" id="8_mj8n8"]
+[ext_resource type="Script" uid="uid://vfifl38oiv3e" path="res://scenes&scripts/collision_shape_2d.gd" id="2_pajsh"]
+[ext_resource type="AudioStream" uid="uid://bp37oq5qglxxo" path="res://assets/sfx/jump sfx.wav" id="2_seiki"]
+[ext_resource type="AudioStream" uid="uid://cudcwd2dj3gx7" path="res://assets/sfx/grab sfx.wav" id="3_mj8n8"]
+[ext_resource type="AudioStream" uid="uid://de76uekabtldr" path="res://assets/sfx/TrickComplete.wav" id="4_seiki"]
+[ext_resource type="Texture2D" uid="uid://by3htnp5p6607" path="res://assets/sprites/loopguy.png" id="5_mvksm"]
+[ext_resource type="AudioStream" uid="uid://d35ef1fx3xj1q" path="res://assets/sfx/whoosh-jump.wav" id="6_dw6d4"]
+[ext_resource type="AudioStream" uid="uid://bmvpl7bymsv1e" path="res://assets/sfx/wind-sound-clip.mp3" id="7_mj8n8"]
+[ext_resource type="FontFile" uid="uid://bit32tvpkg3ow" path="res://assets/fonts/ari-w9500-bold.ttf" id="7_seiki"]
+[ext_resource type="Script" uid="uid://2gusxynei5w4" path="res://scenes&scripts/score_popup.gd" id="9_dw6d4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ij6vw"]
 size = Vector2(77, 241)
@@ -391,7 +390,9 @@ target_position = Vector2(500, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(7.5, -0.5)
+scale = Vector2(0.839999, 0.839999)
 shape = SubResource("RectangleShape2D_ij6vw")
+script = ExtResource("2_pajsh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
@@ -419,20 +420,25 @@ sprite_frames = SubResource("SpriteFrames_4j65y")
 [node name="WEeeeeee" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_dw6d4")
 
-
 [node name="windWhooshing" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(64, -200)
 stream = ExtResource("7_mj8n8")
 volume_db = -16.934
 autoplay = true
 
-[node name="Label" type="Label" parent="."]
+[node name="score_popup" type="Label" parent="."]
 offset_left = 64.0
 offset_top = -200.0
 offset_right = 104.0
 offset_bottom = -118.0
+theme_override_constants/outline_size = 40
 theme_override_fonts/font = ExtResource("7_seiki")
 theme_override_font_sizes/font_size = 64
+text = "200"
+script = ExtResource("9_dw6d4")
+
+[node name="score_time" type="Timer" parent="score_popup"]
+wait_time = 0.5
 
 [node name="hookParticles" type="CPUParticles2D" parent="."]
 position = Vector2(81, 0)
@@ -454,3 +460,8 @@ scale_amount_max = 20.0
 scale_amount_curve = SubResource("Curve_pajsh")
 color_ramp = SubResource("Gradient_rsf1m")
 
+[node name="score_mult_timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="score_popup/score_time" to="score_popup" method="_on_score_time_timeout"]
+[connection signal="timeout" from="score_mult_timer" to="." method="_on_score_mult_timer_timeout"]

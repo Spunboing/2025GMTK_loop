@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://4s5emxdc4kl8"
-path="res://.godot/imported/Pocket.wav-098c28ac7e466389fbb3b0eb7f7cd04c.sample"
+path="res://.godot/imported/Pocket.wav-2942f46d0f38e54b9951ab695e6a7da2.sample"
 
 [deps]
 
-source_file="res://music/Pocket.wav"
-dest_files=["res://.godot/imported/Pocket.wav-098c28ac7e466389fbb3b0eb7f7cd04c.sample"]
+source_file="res://assets/music/Pocket.wav"
+dest_files=["res://.godot/imported/Pocket.wav-2942f46d0f38e54b9951ab695e6a7da2.sample"]
 
 [params]
 

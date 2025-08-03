@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjx0a83at5ey5"
-path="res://.godot/imported/tilesmap.png-6eaa0fbac1f691185894f9f63be06161.ctex"
+uid="uid://bga1hsm8ci45m"
+path="res://.godot/imported/red_drapes.png-579d4b0fe6221b2c34bff9af2e962c01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/tilesmap.png"
-dest_files=["res://.godot/imported/tilesmap.png-6eaa0fbac1f691185894f9f63be06161.ctex"]
+source_file="res://assets/sprites/red_drapes.png"
+dest_files=["res://.godot/imported/red_drapes.png-579d4b0fe6221b2c34bff9af2e962c01.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbja2gytenvch"
-path="res://.godot/imported/crowd.png-c14cfb06ddac02ae012bf1def1bac306.ctex"
+uid="uid://spdb1l7lbhtu"
+path="res://.godot/imported/grabby.png-c530b7c4053cef3501b191d56f94c5ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/crowd.png"
-dest_files=["res://.godot/imported/crowd.png-c14cfb06ddac02ae012bf1def1bac306.ctex"]
+source_file="res://assets/sprites/grabby.png"
+dest_files=["res://.godot/imported/grabby.png-c530b7c4053cef3501b191d56f94c5ee.ctex"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cgb5knf88i4nc"
-path="res://.godot/imported/upheavtt.ttf-ba33a0836ad9e7a241460369a660ef0f.fontdata"
+uid="uid://bit32tvpkg3ow"
+path="res://.godot/imported/ari-w9500-bold.ttf-743346fbac1ec8910b20ec8823537ce8.fontdata"
 
 [deps]
 
-source_file="res://assets/upheavtt.ttf"
-dest_files=["res://.godot/imported/upheavtt.ttf-ba33a0836ad9e7a241460369a660ef0f.fontdata"]
+source_file="res://assets/fonts/ari-w9500-bold.ttf"
+dest_files=["res://.godot/imported/ari-w9500-bold.ttf-743346fbac1ec8910b20ec8823537ce8.fontdata"]
 
 [params]
 

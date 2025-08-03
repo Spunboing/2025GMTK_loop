@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://u0kys32x2xl3"
-path="res://.godot/imported/Whoosh.wav-b64b91b737801b68a953191f84097217.sample"
+uid="uid://c3oucj15sl1ii"
+path="res://.godot/imported/blipSelect.wav-e37bc62329ca70eeccb7e3ea3c55e787.sample"
 
 [deps]
 
-source_file="res://sfx/Whoosh.wav"
-dest_files=["res://.godot/imported/Whoosh.wav-b64b91b737801b68a953191f84097217.sample"]
+source_file="res://assets/sfx/blipSelect.wav"
+dest_files=["res://.godot/imported/blipSelect.wav-e37bc62329ca70eeccb7e3ea3c55e787.sample"]
 
 [params]
 

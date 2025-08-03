@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://fjjqrhtpl07o"]
 
-[ext_resource type="Texture2D" uid="uid://spdb1l7lbhtu" path="res://sprites/grabby.png" id="1_8lbqe"]
+[ext_resource type="Texture2D" uid="uid://spdb1l7lbhtu" path="res://assets/sprites/grabby.png" id="1_8lbqe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y1nld"]
 radius = 32.1965

@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var arm = $Arm
 @onready var score_popup: Label = $score_popup
+@onready var score_mult_timer: Timer = $score_mult_timer
 
 const SPEED = 500.0
 const JUMP_VELOCITY = -600.0
@@ -28,7 +29,6 @@ const SPIN_ACCEL: float = 720
 var splitKeyPressTime: int = 0 #in msecs
 var isDoingSplits: bool = false
 var doingSplitInput: bool = false
-
 var isDoingStar: bool = false
 
 var lastCompletedSplitTime: int = 0
@@ -50,6 +50,7 @@ func _ready() -> void:
 	arm.visible = false
 
 func _physics_process(delta: float) -> void:
+	#print(Input.get_axis("flip_left", "flip_right"))
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -118,7 +119,7 @@ func _physics_process(delta: float) -> void:
 	detectFlip()
 	handleSplitOrStar()
 	
-	print(velocity.length())
+	#print(velocity.length())
 	$windWhooshing.volume_db = clamp(remap(velocity.length(), 1000, 2500, -15, 0), -20, 0)
 	
 	queue_redraw()
@@ -225,12 +226,13 @@ func detectFlip():
 	elif Input.is_action_just_released("flip_left") or Input.is_action_just_released("flip_right"):
 		if abs(totalFlipRotation) >= 300:
 			completedFlip()
-	
+	if isFlipping and Input.get_axis("flip_left", "flip_right") == 0:
+			isFlipping = false
 	if Input.get_axis("flip_left", "flip_right") != 0 and not hooked:
 		if not isFlipping:
 			isFlipping = true
 			totalFlipRotation = 0
-		
+			
 		var spinDelta = $AnimatedSprite2D.rotation - previousRotation
 		#highkey stole this part from gemini but it looks right soo...
 		if spinDelta > 180:
@@ -256,6 +258,7 @@ func detectFlip():
 		#print(totalFlipRotation)
 
 func completedFlip():
+	isFlipping = false
 	print("DID A FLIP")
 	totalFlipRotation = 0
 	$trickComplete.play()
@@ -270,16 +273,19 @@ func handleSplitOrStar():
 		if Time.get_ticks_msec() - splitKeyPressTime < 100:
 			isDoingStar = true
 			print("DID STAR")
-			addScore(10,1)
+			addScore(5,1)
 			handleAnimations("star")
 		else:
 			if isDoingSplits && not isFlipping:
-				print("FINISHED SPLITS")
-				print("time: " + str((Time.get_ticks_msec() - splitKeyPressTime)/1000.0).pad_decimals(1))
 				var split_time: float = ((Time.get_ticks_msec() - splitKeyPressTime)/1000.0)
-				addScore(50+((split_time-fmod(split_time,.5))/.5*20),1) #50 points for splits, +20 every .5 seconds splits are held
+				print("FINISHED SPLITS")
+				print("time: " + str(split_time).pad_decimals(1))
+				var splits_add: int = (split_time-fmod(split_time,.5))/.5*10 #50 points for splits, +10 every .5 seconds splits are held up to 350
+				if splits_add > 350:
+					splits_add = 350
+				addScore(50+splits_add,1) 
 			handleAnimations("airAnimation")
-		isDoingSplits = false
+			isDoingSplits = false
 	elif Input.is_action_pressed("splits_star") and doingSplitInput:
 		if Time.get_ticks_msec() - splitKeyPressTime > 100:
 			if not isDoingSplits:
@@ -336,5 +342,11 @@ func handleAnimations(animName: String):
 func addScore(value, combo_mult):
 	score += value*score_mult*combo_mult
 	score_popup.activate(int(value*score_mult*combo_mult))
-=======
 
+func add_score_mult(multiplier):
+	score_mult += multiplier
+	score_mult_timer.start()
+
+
+func _on_score_mult_timer_timeout() -> void:
+	score_mult = 1

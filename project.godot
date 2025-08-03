@@ -11,9 +11,8 @@ config_version=5
 [application]
 
 config/name="loop"
-run/main_scene="uid://bmpr5pskkmlk8"
+run/main_scene="uid://1xff5pumhoo5"
 config/features=PackedStringArray("4.4", "Forward Plus")
-boot_splash/image="uid://caynxxfxhu060"
 config/icon="res://icon.svg"
 
 [autoload]
@@ -28,7 +27,6 @@ window/stretch/mode="viewport"
 [global_group]
 
 obstacles=""
-player=""
 
 [input]
 

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bit32tvpkg3ow"
-path="res://.godot/imported/ari-w9500-bold.ttf-7d2af5ada73ea0073ae58ae7103b16b5.fontdata"
+uid="uid://b4itt4upgds1c"
+path="res://.godot/imported/Minecraft.ttf-e1845dfc080db589cd29d952a380f38e.fontdata"
 
 [deps]
 
-source_file="res://assets/ari-w9500-bold.ttf"
-dest_files=["res://.godot/imported/ari-w9500-bold.ttf-7d2af5ada73ea0073ae58ae7103b16b5.fontdata"]
+source_file="res://assets/fonts/Minecraft.ttf"
+dest_files=["res://.godot/imported/Minecraft.ttf-e1845dfc080db589cd29d952a380f38e.fontdata"]
 
 [params]
 
