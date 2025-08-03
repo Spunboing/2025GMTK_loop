@@ -7,5 +7,6 @@ func _ready() -> void:
 
 
 func _on_button_pressed() -> void:
+	GlobalData.gameplay_active = true
 	MusicController.play_gameplay_music()
 	get_tree().change_scene_to_file("res://scenes&scripts/grapple_test(Joey).tscn")

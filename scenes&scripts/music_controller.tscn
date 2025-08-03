@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://jo7b586ekbux"]
+[gd_scene load_steps=5 format=3 uid="uid://jo7b586ekbux"]
 
-[ext_resource type="Script" uid="uid://cgxj15rywkssa" path="res://node.gd" id="1_c0tu4"]
+[ext_resource type="Script" uid="uid://cgxj15rywkssa" path="res://scenes&scripts/music_controller.gd" id="1_c0tu4"]
 [ext_resource type="AudioStream" uid="uid://4s5emxdc4kl8" path="res://assets/music/Pocket.wav" id="2_2utuy"]
 [ext_resource type="AudioStream" uid="uid://c6hllxyf8v18n" path="res://assets/music/Gameplay.wav" id="3_nbwfh"]
+[ext_resource type="AudioStream" uid="uid://cvd4pjhmk5shh" path="res://assets/sfx/aww-8277.mp3" id="4_emu41"]
 
 [node name="music_controller" type="Node"]
 script = ExtResource("1_c0tu4")
@@ -13,4 +14,10 @@ bus = &"Music"
 
 [node name="gameplay_music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_nbwfh")
+volume_db = -5.943
 bus = &"Music"
+
+[node name="crowd_groan" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_emu41")
+volume_db = 6.0
+bus = &"SFX"

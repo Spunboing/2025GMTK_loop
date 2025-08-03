@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://1xff5pumhoo5"]
 
 [ext_resource type="Script" uid="uid://c0rtfwooqw3u5" path="res://scenes&scripts/title.gd" id="1_i327d"]
-[ext_resource type="Texture2D" uid="uid://cuh0dxivpbpvf" path="res://assets/sprites/51TioqLkRnL._UF894,1000_QL80_.jpg" id="1_qtvll"]
 [ext_resource type="FontFile" uid="uid://cgb5knf88i4nc" path="res://assets/fonts/upheavtt.ttf" id="2_i327d"]
+[ext_resource type="Texture2D" uid="uid://spdb1l7lbhtu" path="res://assets/sprites/grabby.png" id="2_j6qfw"]
 [ext_resource type="Texture2D" uid="uid://by3htnp5p6607" path="res://assets/sprites/loopguy.png" id="2_jurh7"]
 [ext_resource type="Texture2D" uid="uid://bga1hsm8ci45m" path="res://assets/sprites/red_drapes.png" id="4_r3y0w"]
 
@@ -108,17 +108,17 @@ _data = {
 [node name="title" type="Node2D"]
 script = ExtResource("1_i327d")
 
+[node name="Grabby" type="Sprite2D" parent="."]
+position = Vector2(0, 128)
+rotation = 3.14159
+scale = Vector2(100, 100)
+texture = ExtResource("2_j6qfw")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-9, -46)
 rotation = -0.47736
 scale = Vector2(9.33275, 9.33275)
 sprite_frames = SubResource("SpriteFrames_8fs0m")
-
-[node name="51TioqLkRnL_Uf894,1000Ql80" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(-0.196228, 137.809)
-scale = Vector2(1.3754, 1.3754)
-texture = ExtResource("1_qtvll")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-0.196228, 134.809)

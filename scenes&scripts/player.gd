@@ -5,8 +5,11 @@ extends CharacterBody2D
 @onready var arm = $Arm
 @onready var score_popup: Label = $score_popup
 @onready var score_mult_timer: Timer = $score_mult_timer
+@onready var crowd: AudioStreamPlayer2D = $crowd
 
 var consec_flip_count: int = 1
+var consec_star_flip_count: int = 1
+var consec_split_flip_count: int = 1
 var flip_count: int = 0
 var star_count: int = 0
 var split_count: int = 0
@@ -55,82 +58,83 @@ func _ready() -> void:
 	arm.visible = false
 
 func _physics_process(delta: float) -> void:
-	#print(Input.get_axis("flip_left", "flip_right"))
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		$JumpAudio.play()
-		handleAnimations("airAnimation")
-		
-	#if not is_on_floor() and not hooked:
-		#animated_sprite.play("jump")
-
-	
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("left", "right")
-	
-
-	if velocity.x > 0:
-		animated_sprite.flip_h  = false 
-	elif velocity.x < 0:
-		animated_sprite.flip_h = true
-
-	if is_on_floor():
-		handleAnimations("onGround")
-		
-
-
-	
-	if direction:
-		if is_on_floor():
-			hooked = false
-			if abs(velocity.x) < SPEED:
-				velocity.x += direction * ACCEL * delta
-		else:
-			#print("in air")
-			if direction * velocity.x <= 0 or abs(velocity.x) < SPEED:
-				#print("slowing down")
-				velocity.x += direction * ACCEL_AIR * delta
-
-	elif is_on_floor():
-		velocity.x = move_toward(velocity.x, 0, SLOWDOWN_ACCEL_GROUND * delta)
-	"""
-	if abs(velocity.x) > SPEED and is_on_floor():
-		velocity.x = move_toward(velocity.x, ((velocity.x)/abs(velocity.x) * 0.9) * SPEED, SLOWDOWN_ACCEL_GROUND * delta)
-	"""
-	hook()
-	
-	#update()
-	if hooked:
-		$AnimatedSprite2D.rotation = 0
-		swing(delta)
+	if GlobalData.gameplay_active:
+		#print(Input.get_axis("flip_left", "flip_right"))
+		# Add the gravity.
 		if not is_on_floor():
-			arm.visible = true
-		arm.global_rotation = ((hook_pos - arm.global_position).angle()) - 67.5
-		spinVel = 0
-		#velocity *= .975 #Swing speed
+			velocity += get_gravity() * delta
+
+		# Handle jump.
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+			$JumpAudio.play()
+			handleAnimations("airAnimation")
+			
+		#if not is_on_floor() and not hooked:
+			#animated_sprite.play("jump")
+
 		
-	var spinInput = Input.get_axis("flip_left", "flip_right")
-	if not is_on_floor() and not hooked:
-		arm.visible = false
-		spinVel = move_toward(spinVel, spinInput * MAX_SPIN_SPEED, SPIN_ACCEL * delta)
-		$AnimatedSprite2D.rotate(deg_to_rad(spinVel) * delta)
-	
-	detectFlip()
-	handleSplitOrStar()
-	
-	#print(velocity.length())
-	$windWhooshing.volume_db = clamp(remap(velocity.length(), 1000, 2500, -15, 0), -20, 0)
-	
-	queue_redraw()
-	
-	previousRotation = $AnimatedSprite2D.rotation
-	move_and_slide()
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var direction := Input.get_axis("left", "right")
+		
+
+		if velocity.x > 0:
+			animated_sprite.flip_h  = false 
+		elif velocity.x < 0:
+			animated_sprite.flip_h = true
+
+		if is_on_floor():
+			handleAnimations("onGround")
+			
+
+
+		
+		if direction:
+			if is_on_floor():
+				hooked = false
+				if abs(velocity.x) < SPEED:
+					velocity.x += direction * ACCEL * delta
+			else:
+				#print("in air")
+				if direction * velocity.x <= 0 or abs(velocity.x) < SPEED:
+					#print("slowing down")
+					velocity.x += direction * ACCEL_AIR * delta
+
+		elif is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, SLOWDOWN_ACCEL_GROUND * delta)
+		"""
+		if abs(velocity.x) > SPEED and is_on_floor():
+			velocity.x = move_toward(velocity.x, ((velocity.x)/abs(velocity.x) * 0.9) * SPEED, SLOWDOWN_ACCEL_GROUND * delta)
+		"""
+		hook()
+		
+		#update()
+		if hooked:
+			$AnimatedSprite2D.rotation = 0
+			swing(delta)
+			if not is_on_floor():
+				arm.visible = true
+			arm.global_rotation = ((hook_pos - arm.global_position).angle()) - 67.5
+			spinVel = 0
+			#velocity *= .975 #Swing speed
+			
+		var spinInput = Input.get_axis("flip_left", "flip_right")
+		if not is_on_floor() and not hooked:
+			arm.visible = false
+			spinVel = move_toward(spinVel, spinInput * MAX_SPIN_SPEED, SPIN_ACCEL * delta)
+			$AnimatedSprite2D.rotate(deg_to_rad(spinVel) * delta)
+		
+		detectFlip()
+		handleSplitOrStar()
+		
+		#print(velocity.length())
+		$windWhooshing.volume_db = clamp(remap(velocity.length(), 1000, 2500, -15, 0), -20, 0)
+		
+		queue_redraw()
+		
+		previousRotation = $AnimatedSprite2D.rotation
+		move_and_slide()
 
 func _draw():
 	var pos = global_position
@@ -159,6 +163,9 @@ func hook():
 		#print(hook_pos)
 		if hook_pos:
 			hooked = true
+			consec_star_flip_count = 1
+			consec_split_flip_count = 1
+			consec_flip_count = 1
 			handleAnimations("grapple")
 			$hookParticles.global_position = hook_pos
 			$hookParticles.emitting = true
@@ -230,6 +237,8 @@ func detectFlip():
 		totalFlipRotation = 0
 	elif Input.is_action_just_released("flip_left") or Input.is_action_just_released("flip_right"):
 		consec_flip_count = 1
+		consec_split_flip_count = 1
+		consec_star_flip_count = 1
 		if abs(totalFlipRotation) >= 300:
 			completedFlip()
 	if isFlipping and Input.get_axis("flip_left", "flip_right") == 0:
@@ -250,14 +259,24 @@ func detectFlip():
 
 		if abs(totalFlipRotation) >= 360:
 			if isDoingStar:
-				addScore(200*consec_flip_count,2)
-				score_popup.text += "\nsplit/star combo! X" + str(consec_flip_count) 
-				consec_flip_count += 1
+				consec_flip_count = 1
+				consec_split_flip_count = 1
+				addScore(200*consec_star_flip_count,2)
+				score_popup.text += "\nstar/flip combo!"
+				if consec_star_flip_count > 1:
+					score_popup.text += " X" + str(consec_star_flip_count) 
+				consec_star_flip_count += 1
 			elif isDoingSplits:
-				addScore(200*consec_flip_count, 1.5)
-				score_popup.text += "\nsplit/flip combo! X" + str(consec_flip_count) 
-				consec_flip_count += 1
+				consec_flip_count = 1
+				consec_star_flip_count = 1
+				addScore(200*consec_split_flip_count, 1.5)
+				score_popup.text += "\nsplit/flip combo!"
+				if consec_split_flip_count > 1:
+					score_popup.text += " X" + str(consec_split_flip_count) 
+				consec_split_flip_count += 1
 			else:
+				consec_star_flip_count = 1
+				consec_split_flip_count = 1
 				addScore(200*consec_flip_count, 1)
 				if consec_flip_count > 1:
 					score_popup.text += "\n" + "flip X" + str(consec_flip_count) 
@@ -340,6 +359,7 @@ func handleAnimations(animName: String):
 	elif animName == "star":
 		animated_sprite.play("star")
 		await get_tree().create_timer(1).timeout
+		isDoingStar = false
 		if animated_sprite.animation == "star":
 			if is_on_floor():
 				handleAnimations("onGround")
@@ -355,6 +375,8 @@ func handleAnimations(animName: String):
 			
 
 func addScore(value, combo_mult):
+	if value > 0:
+		cheer()
 	print(value*score_mult*combo_mult)
 	score += value*score_mult*combo_mult
 	score_popup.activate(int(value*score_mult*combo_mult))
@@ -365,3 +387,7 @@ func add_score_mult(multiplier):
 
 func _on_score_mult_timer_timeout() -> void:
 	score_mult = 1
+
+func cheer():
+	crowd.pitch_scale = randf_range(1,1.5)
+	crowd.play()
