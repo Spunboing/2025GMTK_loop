@@ -11,7 +11,7 @@
 [ext_resource type="TileSet" uid="uid://vy22ujmksf2a" path="res://assets/sprites/new_tile_set.tres" id="4_wb70l"]
 [ext_resource type="Script" uid="uid://bfcj8sb8nrpxh" path="res://scenes&scripts/grapple_point_spawner.gd" id="5_100jw"]
 [ext_resource type="AudioStream" uid="uid://c6hllxyf8v18n" path="res://assets/music/Gameplay.wav" id="9_vqadq"]
-[ext_resource type="Script" uid="uid://dep4kg5tar551" path="res://scenes&scripts/label.gd" id="10_hkk1p"]
+[ext_resource type="Script" path="res://scenes&scripts/label.gd" id="10_hkk1p"]
 [ext_resource type="Script" uid="uid://btxm20qvc0lw7" path="res://scenes&scripts/multiplier.gd" id="13_oycc7"]
 [ext_resource type="PackedScene" uid="uid://ll1dqwr7i7cx" path="res://scenes&scripts/hoop.tscn" id="14_oycc7"]
 

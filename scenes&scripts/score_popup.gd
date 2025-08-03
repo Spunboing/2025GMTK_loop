@@ -21,7 +21,10 @@ func activate(score):
 	if player.score_mult != 1:
 		text = str(score/player.score_mult) + " X" + str(player.score_mult)
 		if score >= 0:
-			add_theme_color_override("font_color", Color(.54,.22,.00,1))#orange
+				add_theme_color_override("font_color", Color(.54,.22,.00,1))#orange
+	if player.repeat_mult != 1.0:
+		print("REPEAT")
+		add_theme_color_override("font_color", Color(0.5, 0.5, 0.5,1))#gray
 	visible = true
 	score_time.start()
 

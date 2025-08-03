@@ -11,6 +11,7 @@ const JUMP_VELOCITY = -600.0
 
 var score: int = 0
 var score_mult: int = 1
+var repeat_mult: float = 1
 
 var hook_pos = Vector2()
 var hooked = false
@@ -30,10 +31,13 @@ var splitKeyPressTime: int = 0 #in msecs
 var isDoingSplits: bool = false
 var doingSplitInput: bool = false
 var isDoingStar: bool = false
+var flipCheck: bool = false #checks if just completed flip, if so, doesn't award points
 
 var lastCompletedSplitTime: int = 0
 
+var pastTricks = []
 
+#var isDiving: bool = false
 
 @export var GRAPPLE_ACCEL_MULT: float = 1
 @export var ROPE_STIFFNESS: float = 0.7
@@ -63,8 +67,14 @@ func _physics_process(delta: float) -> void:
 		
 	#if not is_on_floor() and not hooked:
 		#animated_sprite.play("jump")
-
-	
+	'''
+	if Input.is_action_pressed("dive") and not is_on_floor():
+		isDiving = true
+		$AnimatedSprite2D.play("dive")
+	elif Input.is_action_just_released("dive") and isDiving:
+		isDiving = false
+		handleAnimations("enterAir")
+	'''
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
@@ -162,6 +172,7 @@ func hook():
 	if Input.is_action_just_released("left_click") and hooked:
 		hooked = false
 		arm.visible = false
+		totalFlipRotation = 0
 		if velocity.y < 0:
 			$WEeeeeee.play()
 		handleAnimations("airAnimation")
@@ -226,6 +237,7 @@ func detectFlip():
 	elif Input.is_action_just_released("flip_left") or Input.is_action_just_released("flip_right"):
 		if abs(totalFlipRotation) >= 300:
 			completedFlip()
+
 	if isFlipping and Input.get_axis("flip_left", "flip_right") == 0:
 			isFlipping = false
 	if Input.get_axis("flip_left", "flip_right") != 0 and not hooked:
@@ -243,38 +255,43 @@ func detectFlip():
 		totalFlipRotation += rad_to_deg(spinDelta)
 
 		if abs(totalFlipRotation) >= 360:
-			if isDoingStar:
-				addScore(200,2)
-			if isDoingSplits:
-				addScore(200, 1.5)
-			else:
-				addScore(200, 1)
-			print("DID A FLIP")
-			totalFlipRotation = 0
-			$trickComplete.play()
+			completedFlip()
 
 			
 
 		#print(totalFlipRotation)
 
 func completedFlip():
-	isFlipping = false
+	if isDoingStar:
+		updatePastTricks("flip_star", 200, 2)
+		#addScore(200,2)
+	elif isDoingSplits:
+		updatePastTricks("flip_splits", 200, 1.5)
+		#addScore(200, 1.5)
+	else:
+		updatePastTricks("flip", 200, 1)
+		#addScore(200, 1)
 	print("DID A FLIP")
 	totalFlipRotation = 0
 	$trickComplete.play()
+	flipCheck = true
 
 func handleSplitOrStar():
 	if Input.is_action_just_pressed("splits_star") and not is_on_floor():
 		splitKeyPressTime = Time.get_ticks_msec()
 		doingSplitInput = true
+		flipCheck = false
 	
 	if Input.is_action_just_released("splits_star"):
 		doingSplitInput = false
-		if Time.get_ticks_msec() - splitKeyPressTime < 100:
+		if Time.get_ticks_msec() - splitKeyPressTime < 100 and (Time.get_ticks_msec() - lastCompletedSplitTime >= 1000):
 			isDoingStar = true
 			print("DID STAR")
-			addScore(5,1)
+			if not isFlipping and not flipCheck:
+				updatePastTricks("star", 25, 1)
+			#addScore(5,1)
 			handleAnimations("star")
+			lastCompletedSplitTime = Time.get_ticks_msec()
 		else:
 			if isDoingSplits && not isFlipping:
 				var split_time: float = ((Time.get_ticks_msec() - splitKeyPressTime)/1000.0)
@@ -283,7 +300,9 @@ func handleSplitOrStar():
 				var splits_add: int = (split_time-fmod(split_time,.5))/.5*10 #50 points for splits, +10 every .5 seconds splits are held up to 350
 				if splits_add > 350:
 					splits_add = 350
-				addScore(50+splits_add,1) 
+				if not flipCheck:
+					updatePastTricks("splits", 50 + splits_add, 1)
+				#addScore(50+splits_add,1) 
 			handleAnimations("airAnimation")
 			isDoingSplits = false
 	elif Input.is_action_pressed("splits_star") and doingSplitInput:
@@ -307,6 +326,8 @@ func handleAnimations(animName: String):
 	elif animName == "airAnimation":
 		if hooked:
 			handleAnimations("grapple")
+		elif isDoingSplits:
+			handleAnimations("split")
 		else:
 			handleAnimations("jump")
 	
@@ -337,16 +358,28 @@ func handleAnimations(animName: String):
 			handleAnimations("split")
 		else:
 			animated_sprite.play("grapple")
-			
 
-func addScore(value, combo_mult):
-	score += value*score_mult*combo_mult
+func addScore(value, combo_mult: float):
+	print("value: " + str(value) + ", mult: " + str(combo_mult))
+	score += float(value*score_mult*combo_mult)
 	score_popup.activate(int(value*score_mult*combo_mult))
 
 func add_score_mult(multiplier):
 	score_mult += multiplier
 	score_mult_timer.start()
 
-
 func _on_score_mult_timer_timeout() -> void:
 	score_mult = 1
+
+func updatePastTricks(trick: String, points, mult):
+	if pastTricks.size() >= 3:
+		pastTricks.remove_at(0)
+	pastTricks.append(trick)
+	var count = 0.0
+	
+	for t in pastTricks:
+		if t == trick:
+			count += 1
+	print("TIMES COMPLETED " + str(trick) + ": " + str(count) + " | MULT: " + str(float(mult * (1/count))))
+	addScore(points, float(mult * (1/count)))
+	repeat_mult = (1/count)
