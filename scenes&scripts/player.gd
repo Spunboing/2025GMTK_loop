@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var raycast: Node = $Raycast
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var arm = $Arm
-@onready var score_popup: Label = $Label
+@onready var score_popup: Label = $score_popup
 
 const SPEED = 500.0
 const JUMP_VELOCITY = -600.0
@@ -28,7 +28,11 @@ const SPIN_ACCEL: float = 720
 var splitKeyPressTime: int = 0 #in msecs
 var isDoingSplits: bool = false
 var doingSplitInput: bool = false
+
+var isDoingStar: bool = false
+
 var lastCompletedSplitTime: int = 0
+
 
 
 @export var GRAPPLE_ACCEL_MULT: float = 1
@@ -237,11 +241,18 @@ func detectFlip():
 		totalFlipRotation += rad_to_deg(spinDelta)
 
 		if abs(totalFlipRotation) >= 360:
+			if isDoingStar:
+				addScore(200,2)
+			if isDoingSplits:
+				addScore(200, 1.5)
+			else:
+				addScore(200, 1)
 			print("DID A FLIP")
-			add_score(100)
 			totalFlipRotation = 0
 			$trickComplete.play()
-			#will put something else here later
+
+			
+
 		#print(totalFlipRotation)
 
 func completedFlip():
@@ -257,11 +268,16 @@ func handleSplitOrStar():
 	if Input.is_action_just_released("splits_star"):
 		doingSplitInput = false
 		if Time.get_ticks_msec() - splitKeyPressTime < 100:
+			isDoingStar = true
 			print("DID STAR")
+			addScore(10,1)
 			handleAnimations("star")
 		else:
-			print("FINISHED SPLITS")
-			print("time: " + str((Time.get_ticks_msec() - splitKeyPressTime)/1000.0).pad_decimals(1))
+			if isDoingSplits && not isFlipping:
+				print("FINISHED SPLITS")
+				print("time: " + str((Time.get_ticks_msec() - splitKeyPressTime)/1000.0).pad_decimals(1))
+				var split_time: float = ((Time.get_ticks_msec() - splitKeyPressTime)/1000.0)
+				addScore(50+((split_time-fmod(split_time,.5))/.5*20),1) #50 points for splits, +20 every .5 seconds splits are held
 			handleAnimations("airAnimation")
 		isDoingSplits = false
 	elif Input.is_action_pressed("splits_star") and doingSplitInput:
@@ -306,8 +322,10 @@ func handleAnimations(animName: String):
 		if animated_sprite.animation == "star":
 			if is_on_floor():
 				handleAnimations("onGround")
+				isDoingStar = false
 			else:
 				handleAnimations("airAnimation")
+				isDoingStar = false
 	elif animName == "grapple":
 		if isDoingSplits:
 			handleAnimations("split")
@@ -315,5 +333,8 @@ func handleAnimations(animName: String):
 			animated_sprite.play("grapple")
 			
 
-func add_score(value):
-	score += value*score_mult
+func addScore(value, combo_mult):
+	score += value*score_mult*combo_mult
+	score_popup.activate(int(value*score_mult*combo_mult))
+=======
+

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var speed : int = 50
+@export var speed : int = 30
 
 func _ready() -> void:
 	$AnimationPlayer.play("spin")
@@ -9,7 +9,5 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	position.x -= speed
 	
-
-
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()

@@ -1,4 +1,6 @@
+
 [gd_scene load_steps=32 format=3 uid="uid://dtpghtphnrtur"]
+
 
 [ext_resource type="Script" uid="uid://c8qr48rrswm3f" path="res://scenes&scripts/player.gd" id="1_ij6vw"]
 [ext_resource type="AudioStream" uid="uid://bp37oq5qglxxo" path="res://sfx/jump sfx.wav" id="2_seiki"]
@@ -8,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://d35ef1fx3xj1q" path="res://sfx/whoosh-jump.wav" id="6_dw6d4"]
 [ext_resource type="AudioStream" uid="uid://bmvpl7bymsv1e" path="res://sfx/wind-sound-clip.mp3" id="7_mj8n8"]
 [ext_resource type="FontFile" uid="uid://bit32tvpkg3ow" path="res://assets/ari-w9500-bold.ttf" id="7_seiki"]
+[ext_resource type="Script" uid="uid://2gusxynei5w4" path="res://scenes&scripts/score_popup.gd" id="8_mj8n8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ij6vw"]
 size = Vector2(77, 241)
@@ -405,7 +408,7 @@ stream = ExtResource("4_seiki")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(7.5625, 7.5625)
 sprite_frames = SubResource("SpriteFrames_mr2mj")
-animation = &"twirl"
+animation = &"idle"
 
 [node name="Arm" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -415,6 +418,7 @@ sprite_frames = SubResource("SpriteFrames_4j65y")
 
 [node name="WEeeeeee" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_dw6d4")
+
 
 [node name="windWhooshing" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(64, -200)
@@ -449,3 +453,4 @@ scale_amount_min = 15.0
 scale_amount_max = 20.0
 scale_amount_curve = SubResource("Curve_pajsh")
 color_ramp = SubResource("Gradient_rsf1m")
+
